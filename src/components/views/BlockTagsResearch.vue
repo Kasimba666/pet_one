@@ -1,13 +1,20 @@
 <template>
     <div class="BlockTagsResearch">
-        <h2 class="paragraph">BlockTagsResearch</h2>
+        <h1 class="paragraph">Block Tags Research</h1>
+        <div class="circles">
+            <MyCircle mycolor="green"></MyCircle>
+
+        </div>
+
     </div>
 </template>
 
 <script>
+import MyCircle from "@/components/common/MyCircle.vue";
+
 export default {
     name: "BlockTagsResearch",
-    components: {},
+    components: {MyCircle},
     props: [],
     data() {
         return {}
@@ -25,10 +32,12 @@ export default {
   width: 100%;
   height: auto;
 
-  .paragraph {
-      color: hsl(120, 100%, 25%);
+  .circles {
+    height: auto;
+    margin: 20px 0;
+      display: flex;
+      justify-content: center;
   }
-
 
 }
 </style>
