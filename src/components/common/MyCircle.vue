@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="MyCircle" :style="{backgroundColor: mycolor}">
+        <div class="MyCircle" :style="{backgroundColor: mybackcolor, borderStyle: myborderstyle}">
         </div>
     </div>
 </template>
@@ -9,7 +9,7 @@
 export default {
     name: "MyCircle",
     components: {},
-    props: ['mycolor'],
+    props: ['mybackcolor', 'myborderstyle'],
     data() {
         return {}
     },

@@ -2,8 +2,7 @@
     <div class="BlockTagsResearch">
         <h1 class="paragraph">Block Tags Research</h1>
         <div class="circles">
-            <MyCircle mycolor="green"></MyCircle>
-
+            <MyCircle mybackcolor="green" myborderstyle="dotted"></MyCircle>
         </div>
 
     </div>
