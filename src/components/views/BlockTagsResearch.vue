@@ -1,8 +1,15 @@
 <template>
     <div class="BlockTagsResearch">
         <h1 class="paragraph">Block Tags Research</h1>
-        <div class="circles">
-            <MyCircle mybackcolor="green" myborderstyle="dotted"></MyCircle>
+        <div>
+            <div class="divrow" v-for="backgroundcolor in backgroundcolors">
+                <div class="divcolumn" v-for="bordercolor in bordercolors">
+                    <MyCircle
+                        :mybackcolor="backgroundcolor.name"
+                        :mybordercolor="bordercolor.name">
+                    </MyCircle>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -16,7 +23,20 @@ export default {
     components: {MyCircle},
     props: [],
     data() {
-        return {}
+      return {
+          backgroundcolors: [
+              {name: 'red'},
+              {name: 'green'},
+              {name: 'blue'},
+              {name: 'white'}
+          ],
+          bordercolors: [
+              {name: 'cyan'},
+              {name: 'magenta'},
+              {name: 'yellow'},
+              {name: 'black'}
+          ],
+      }
     },
     computed: {},
     methods: {},
@@ -30,13 +50,23 @@ export default {
 .BlockTagsResearch {
   width: 100%;
   height: auto;
-
+  .paragraph {
+    color: blueviolet;
+  }
   .circles {
     height: auto;
-    margin: 20px 0;
-      display: flex;
+    margin: 20px 5px;
+      display: inline-block;
       justify-content: center;
   }
-
+  table, tr, td {
+      border: 1px solid black;
+  }
+  .divrow {
+      display: flex;
+      //display: inline-block;
+  }
+  .divcolumn {
+  }
 }
 </style>

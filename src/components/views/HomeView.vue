@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../../assets/logo.png">
-
-
+<!--    <img alt="Vue logo" src="../../assets/logo.png">-->
     <router-view msg="Welcome to Your Vue.js Pet App"/>
   </div>
 </template>

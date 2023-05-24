@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <div class="MyCircle" :style="{backgroundColor: mybackcolor, borderStyle: myborderstyle}">
-        </div>
+    <div
+        class="MyCircle"
+        :style="{backgroundColor: mybackcolor, borderColor: mybordercolor}">
     </div>
 </template>
 
@@ -9,7 +9,7 @@
 export default {
     name: "MyCircle",
     components: {},
-    props: ['mybackcolor', 'myborderstyle'],
+    props: ['mybackcolor', 'mybordercolor'],
     data() {
         return {}
     },
@@ -25,9 +25,10 @@ export default {
 .MyCircle {
   width: 50px;
   height: 50px;
+  margin: 3px;
   background-color: blue;
   border-style: solid;
-  border-width: 2px;
+  border-width: 6px;
   border-color: red;
   border-radius: 50%;
 }
