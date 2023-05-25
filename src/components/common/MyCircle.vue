@@ -23,8 +23,9 @@ export default {
 <style lang="scss">
 /****  MyCircle  ****/
 .MyCircle {
-  width: 50px;
-  height: 50px;
+  --size: 50px;
+  width: var(--circleSize, var(--size, 10px));
+  height: var(--circleSize, var(--size, 10px));
   margin: 3px;
   background-color: blue;
   border-style: solid;
