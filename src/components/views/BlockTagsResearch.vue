@@ -1,47 +1,74 @@
 <template>
-    <div class="BlockTagsResearch">
-        <h1 class="paragraph">Block Tags Research</h1>
-        <div>
-            <div class="divrow" v-for="backgroundcolor in backgroundcolors">
-                <div class="divcolumn" v-for="bordercolor in bordercolors">
-                    <MyCircle
-                        :mybackcolor="backgroundcolor.name"
-                        :mybordercolor="bordercolor.name">
-                    </MyCircle>
-                </div>
-            </div>
-        </div>
-
+  <div class="BlockTagsResearch">
+    <div class="container">
+      <div>
+        <MyCircle mybackcolor='blue' mybordercolor='black'></MyCircle>
+      </div>
+      <div>
+        <MyCircle mybackcolor='white' mybordercolor='black'></MyCircle>
+      </div>
+      <div>
+        <MyCircle mybackcolor='cyan' mybordercolor='black'></MyCircle>
+      </div>
+      <div>
+        <MyCircle mybackcolor='magenta' mybordercolor='black'></MyCircle>
+      </div>
+      <div>
+        <MyCircle mybackcolor='yellow' smybordercolor='black'></MyCircle>
+      </div>
     </div>
+
+    <div class="container">
+      <div v-for="backgroundcolor in backgroundcolors">
+        <div v-for="bordercolor in bordercolors">
+          <MyCircle
+              :mybackcolor="backgroundcolor.name"
+              :mybordercolor="bordercolor.name">
+          </MyCircle>
+        </div>
+      </div>
+    </div>
+<!--          <MyCircle :mybackcolor="backgroundcolors[1].name" :mybordercolor="bordercolors[2].name")></MyCircle>-->
+
+  </div>
+
+
 </template>
 
 <script>
 import MyCircle from "@/components/common/MyCircle.vue";
 
 export default {
-    name: "BlockTagsResearch",
-    components: {MyCircle},
-    props: [],
-    data() {
-      return {
-          backgroundcolors: [
-              {name: 'red'},
-              {name: 'green'},
-              {name: 'blue'},
-              {name: 'white'}
-          ],
-          bordercolors: [
-              {name: 'cyan'},
-              {name: 'magenta'},
-              {name: 'yellow'},
-              {name: 'black'}
-          ],
-      }
+  name: "BlockTagsResearch",
+  components: {MyCircle},
+  props: [],
+  data() {
+    return {
+      backgroundcolors: [
+        {name: 'red'},
+        {name: 'green'},
+        {name: 'blue'},
+        {name: 'white'}
+      ],
+      bordercolors: [
+        {name: 'cyan'},
+        {name: 'magenta'},
+        {name: 'yellow'},
+        {name: 'black'}
+      ],
+    }
+  },
+  computed: {
+    backgroundcolors_size: function () {
+      return this.backgroundcolors.length
     },
-    computed: {},
-    methods: {},
-    mounted() {
-    },
+    bordercolors_size: function () {
+      return this.backgroundcolors.length
+    }
+  },
+  methods: {},
+  mounted() {
+  },
 }
 </script>
 
@@ -50,23 +77,20 @@ export default {
 .BlockTagsResearch {
   width: 100%;
   height: auto;
-  .paragraph {
-    color: blueviolet;
+
+  .container {
+    display: flex;
+    height: 300px;
+
+    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
+
   }
-  .circles {
-    height: auto;
-    margin: 20px 5px;
-      display: inline-block;
-      justify-content: center;
-  }
-  table, tr, td {
-      border: 1px solid black;
-  }
-  .divrow {
-      display: flex;
-      //display: inline-block;
-  }
-  .divcolumn {
+  .container div {
+    background: beige;
+    color: antiquewhite;
+    padding: 10px;
   }
 }
 </style>
