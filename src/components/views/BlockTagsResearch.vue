@@ -1,27 +1,27 @@
 <template>
     <div class="BlockTagsResearch">
 
-        <div class="container" :class="{large}" @click="largeCircle^=1">
-            <MyCircle mybackcolor='olive' mybordercolor='black'></MyCircle>
-            <MyCircle mybackcolor='white' mybordercolor='black'></MyCircle>
-            <MyCircle mybackcolor='cyan' mybordercolor='black'></MyCircle>
-            <MyCircle mybackcolor='magenta' mybordercolor='black'></MyCircle>
-            <MyCircle mybackcolor='yellow' mybordercolor='black'></MyCircle>
-
-        </div>
+        <button @click="print($event)">Принт</button>
 
         <!--    <select name="" id=""></select>-->
+        <input type="text" v-model.number="maxhorizontal">
+        <input type="text" v-model.number="maxvertical">
+        <div
+            class="container"
+            :class="{large}"
 
-        <!--    <div class="container">-->
-        <!--      <div v-for="backgroundcolor in backgroundcolors">-->
-        <!--        <div v-for="bordercolor in bordercolors">-->
-        <!--          <MyCircle-->
-        <!--              :mybackcolor="backgroundcolor.name"-->
-        <!--              :mybordercolor="bordercolor.name">-->
-        <!--          </MyCircle>-->
-        <!--        </div>-->
-        <!--      </div>-->
-        <!--    </div>-->
+            @click="large^=1"
+            v-for="vertical in maxvertical">
+<!--            <div v-for="horizontal in maxhorizontal">-->
+<!--                {{ makeHSL(vertical / maxvertical, horizontal / maxhorizontal) }}-->
+<!--            </div>-->
+            <MyCircle
+                :mybackcolor="makeHSL(vertical / maxvertical, horizontal / maxhorizontal)"
+                mybordercolor='black'
+                v-for="horizontal in maxhorizontal">
+
+            </MyCircle>
+        </div>
     </div>
 
 
@@ -36,20 +36,12 @@ export default {
     props: [],
     data() {
         return {
-            backgroundcolors: [
-                {name: 'red'},
-                {name: 'green'},
-                {name: 'blue'},
-                {name: 'white'}
-            ],
-            bordercolors: [
-                {name: 'cyan'},
-                {name: 'magenta'},
-                {name: 'yellow'},
-                {name: 'black'}
-            ],
             counter: 10,
             large: false,
+            vertical: 1,
+            horizontal: 1,
+            maxvertical: 16,
+            maxhorizontal: 16,
         }
     },
     computed: {
@@ -58,12 +50,15 @@ export default {
         },
         bordercolors_size: function () {
             return this.backgroundcolors.length
-        }
+        },
     },
     methods: {
-        dosomething() {
-
-        }
+        print(e) {
+            console.log(e)
+        },
+        makeHSL: function(h, s) {
+            return 'hsl(' + Math.round(h*360) + ', ' + Math.round(s*100) + '%, 50%)'
+        },
     },
     mounted() {
     },
@@ -80,10 +75,9 @@ export default {
 
     --circleSize: 80px;
     display: flex;
-    height: 300px;
 
     justify-content: center;
-    justify-content: space-around;
+    //justify-content: space-around;
     align-items: center;
 
     &.large {
@@ -98,8 +92,10 @@ export default {
   //  padding: 10px;
   //}
   .MyCircle {
-    box-shadow: 112px 2px 10px -1px hsl(28, 100%, 57%), 12px 32px 10px -1px currentColor,
+    box-shadow:
+        //112px 2px 10px -1px hsl(28, 100%, 57%), 12px 32px 10px -1px currentColor,
     inset 2px 2px 5px 0px hsl(240, 100%, 57%);
+    flex: 0 0 auto;
   }
 
 }
