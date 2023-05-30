@@ -1,7 +1,8 @@
 <template>
     <div
         class="MyCircle"
-        :style="{backgroundColor: mybackcolor, borderColor: mybordercolor}">
+        :style="{backgroundColor: mybackcolor, borderColor: mybordercolor,
+        width: mysize, height: mysize, left: myleft, top: mytop, position: myposition}">
     </div>
 </template>
 
@@ -9,7 +10,7 @@
 export default {
     name: "MyCircle",
     components: {},
-    props: ['mybackcolor', 'mybordercolor'],
+    props: ['mybackcolor', 'mybordercolor', 'mysize', 'myleft', 'mytop', 'myposition'],
     data() {
         return {}
     },
@@ -24,12 +25,13 @@ export default {
 /****  MyCircle  ****/
 .MyCircle {
   --size: 50px;
-  width: var(--circleSize, var(--size, 10px));
-  height: var(--circleSize, var(--size, 10px));
+  //width: var(--circleSize, var(--size, 10px));
+  //height: var(--circleSize, var(--size, 10px));
+
   margin: 3px;
   background-color: blue;
   border-style: solid;
-  border-width: 6px;
+  border-width: 1px;
   border-color: red;
   border-radius: 50%;
 }
