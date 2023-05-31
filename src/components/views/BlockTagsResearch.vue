@@ -1,8 +1,6 @@
 <template>
   <div class="BlockTagsResearch">
-
     <!--        <button @click="print($event)">Принт</button>-->
-
     <div class="inputblock-color-bar">
       <input type="text" v-model.number="maxhorizontal">
       x
@@ -34,7 +32,7 @@
       <MyCircle
           :mybackcolor="makeHSL((circlenumber - 1)/circlesquantity, 1)"
           mybordercolor='black'
-          :mysize="NumberToStrWithPX( mainsegment * qsize)"
+          :mysize="( mainsegment * qsize)+'px'"
           :myleft="NumberToStrWithPX(XfromPolar(maincircleradius, (theta * (circlenumber - 1))) + Math.round(windowsize/2 - mainsegment/2))"
           :mytop="NumberToStrWithPX(YfromPolar(maincircleradius, (theta * (circlenumber - 1))) + Math.round(windowsize/2 - mainsegment/2))"
           myposition='absolute'
@@ -61,7 +59,7 @@ export default {
       maxvertical: 3, maxhorizontal: 3,
       minsize: 20, maxsize: 60,
 
-      circlenumber: 1,
+      // circlenumber: 1,
       circlesquantity: 6,
       qsize: 0.9, //уменьшение размера цветового круга, чтобы не касаться соседей
       windowsize: 500,//должно быть согласовано с div

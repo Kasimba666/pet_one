@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import HomeView from '@/components/views/HomeView.vue';
+import FlexResearch from '@/components/views/FlexResearch.vue';
 import BlockTagsResearch from '@/components/views/BlockTagsResearch.vue';
 import InlineTagsResearch from '@/components/views/InlineTagsResearch.vue';
 import HelloWorld from '@/components/views/HelloWorld.vue';
@@ -14,6 +15,11 @@ const routes = [
     component: HomeView,
     redirect: {name: 'HelloWorld'},
     children: [
+      {
+        path: 'flex',
+        name: 'FlexResearch',
+        component: FlexResearch,
+      },
       {
         path: 'block',
         name: 'BlockTagsResearch',

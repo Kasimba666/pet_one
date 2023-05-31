@@ -2,11 +2,11 @@
   <div id="app">
     <nav>
       <router-link :to="{name: 'HomeView'}">Home</router-link> |
+      <router-link :to="{name: 'FlexResearch'}">Flex</router-link> |
       <router-link :to="{name: 'BlockTagsResearch'}">Block</router-link> |
       <router-link :to="{name: 'InlineTagsResearch'}">Inline</router-link>  |
       <router-link :to="{name: 'HelloWorld'}">Hello</router-link>  |
       <router-link :to="{name: 'AboutView'}">About</router-link>
-
     </nav>
     <router-view/>
   </div>
