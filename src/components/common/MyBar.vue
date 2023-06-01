@@ -1,9 +1,11 @@
 <template>
     <div class="MyBar"
-    :style="{backgroundColor: barbackcolor, borderColor: barbordercolor, height: barheight}">
-        <div class="component-bardescription">{{ bartitle }}</div>
-        <div class="component-barcontent">
-          <div style="width: 20px; height: 20px; background-color: brown"></div>
+    :style="{backgroundColor: barbackcolor, borderColor: barbordercolor}">
+        <div class="bardescription">
+            <slot name="title">Какой-то заголовок</slot>
+        </div>
+        <div class="barcontent">
+            <slot>Квадратики</slot>
         </div>
     </div>
 </template>
@@ -12,7 +14,7 @@
 export default {
     name: "MyBar",
     components: {},
-    props: ['barbackcolor', 'barbordercolor', 'bartitle'],
+    props: ['barbackcolor', 'barbordercolor'],
     data() {
         return {}
     },
@@ -29,19 +31,20 @@ export default {
   width: 100%;
   height: auto;
   border-style: solid;
-  //position: relative;
-  .component-bardescription {
+  position: relative;
+  .bardescription {
      background: ghostwhite;
-     border-style: solid;
-     border-color: grey;
+     //border-style: solid;
+     //border-color: grey;
      padding: 3px;
      margin: 3px 3px 3px;
   }
-  .component-barcontent {
-      border-style: solid;
-      border-color: grey;
+  .barcontent {
       height: 350px;
-      margin: 3px 3px 3px;
+      //border-style: solid;
+      //border-color: grey;
+      //margin: 3px 3px 3px;
+      //position: relative;
   }
 }
 </style>
