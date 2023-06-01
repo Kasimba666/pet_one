@@ -1,11 +1,10 @@
 <template>
     <div class="MyBar"
-    :style="{backgroundColor: mybackcolor, borderColor: mybordercolor, width: mywidth, height: myheight}">
-        <div class="bardescription">Здесь происходит вот что:</div>
-        <div class="barcontent">
-
+    :style="{backgroundColor: barbackcolor, borderColor: barbordercolor, height: barheight}">
+        <div class="component-bardescription">{{ bartitle }}</div>
+        <div class="component-barcontent">
+          <div style="width: 20px; height: 20px; background-color: brown"></div>
         </div>
-
     </div>
 </template>
 
@@ -13,7 +12,7 @@
 export default {
     name: "MyBar",
     components: {},
-    props: ['mybackcolor', 'mybordercolor', 'mywidth', 'myheight'],
+    props: ['barbackcolor', 'barbordercolor', 'bartitle'],
     data() {
         return {}
     },
@@ -31,17 +30,17 @@ export default {
   height: auto;
   border-style: solid;
   //position: relative;
-  .bardescription {
+  .component-bardescription {
      background: ghostwhite;
      border-style: solid;
      border-color: grey;
      padding: 3px;
      margin: 3px 3px 3px;
   }
-  .barcontent {
+  .component-barcontent {
       border-style: solid;
       border-color: grey;
-      padding: 3px;
+      height: 350px;
       margin: 3px 3px 3px;
   }
 }
