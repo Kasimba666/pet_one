@@ -111,10 +111,18 @@ export default {
     &.ctr-2 {
       display: flex;
       flex-flow: row wrap;
+      gap: 20px 10px;
       justify-content: space-around;
+      align-items: start4;
+      align-content: center;
+      div:nth-child(even){
+        height: 20px;
+      }
     }
     &.ctr-3 {
-      display: flex;
+
+        display: flex;
+
       flex-flow: row wrap;
       justify-content: space-around;
       div:first-child {
@@ -123,6 +131,7 @@ export default {
       div:last-child {
         align-self: flex-end;
       }
+
     }
     &.ctr-4 {
       display: flex;
@@ -136,7 +145,10 @@ export default {
   }
 
   .square {
-      width: 60px;
+    flex: 1 1 auto;
+      //width: 45px;
+    min-width: 40px;
+    max-width: 60px;
       height: 60px;
       border-style: solid;
       //border-color: black;
