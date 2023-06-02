@@ -2,11 +2,9 @@
   <div class="FlexResearch">
     <div class="grid">
         <MyBar barbackcolor='azure' barbordercolor='black'>
-            бля
-
-            <template v-slot:title><b>Один</b></template>
+          <template v-slot:title><b>flex-flow: row wrap; justify-content: center; justify-content: space-between;</b></template>
                 <div class="square-container ctr-1">
-                    <div class="square type1" style="background-color: hsl(271,100%,43%)"></div>
+                    <div class="square type1" style="background-color: hsl(271,95%,53%)"></div>
                     <div class="square type1" style="background-color: hsl(271,95%,53%)"></div>
                     <div class="square type1" style="background-color: hsl(271,90%,63%)"></div>
                     <div class="square type1" style="background-color: hsl(271,85%,73%)"></div>
@@ -17,13 +15,11 @@
                     <div class="square type1" style="background-color: hsl(271,60%,63%)"></div>
                     <div class="square type1" style="background-color: hsl(271,55%,53%)"></div>
                 </div>
-
         </MyBar>
         <MyBar barbackcolor='azure' barbordercolor='black'>
-            <template v-slot:title><b>Два</b></template>
-            <template v-slot:setofsquares>
-                <div class="square-container">
-                    <div class="square type2"  style="background-color: hsl(91,100%,43%)"></div>
+            <template v-slot:title><b>flex-flow: row wrap; justify-content: space-around;</b></template>
+                <div class="square-container ctr-2">
+                    <div class="square" style="background-color: hsl(91,100%,43%)"></div>
                     <div class="square" style="background-color: hsl(91,95%,53%)"></div>
                     <div class="square" style="background-color: hsl(91,90%,63%)"></div>
                     <div class="square" style="background-color: hsl(91,85%,73%)"></div>
@@ -34,32 +30,28 @@
                     <div class="square" style="background-color: hsl(91,60%,63%)"></div>
                     <div class="square" style="background-color: hsl(91,55%,53%)"></div>
                 </div>
-            </template>
-        </MyBar>
+            </MyBar>
 
         <MyBar barbackcolor='azure' barbordercolor='black'>
-            <template v-slot:title><b>Три</b></template>
-            <template v-slot:setofsquares>
-                <div class="square-container">
-                    <div class="square type3" style="background-color: hsl(151,100%,43%)"></div>
+            <template v-slot:title><b>div:first-child {align-self: center} div:last-child {align-self: flex-end}</b></template>
+                    <div class="square-container ctr-3">
+                    <div class="square" style="background-color: hsl(151,100%,43%)"></div>
                     <div class="square" style="background-color: hsl(151,95%,53%)"></div>
                     <div class="square" style="background-color: hsl(151,90%,63%)"></div>
                     <div class="square" style="background-color: hsl(151,85%,73%)"></div>
                     <div class="square" style="background-color: hsl(151,80%,83%)"></div>
                     <div class="square" style="background-color: hsl(151,75%,93%)"></div>
-                    <div class="square" style="background-color: hsl(151,70%,83%)"></div>
-                    <div class="square" style="background-color: hsl(151,65%,73%)"></div>
-                    <div class="square" style="background-color: hsl(151,60%,63%)"></div>
-                    <div class="square" style="background-color: hsl(151,55%,53%)"></div>
+<!--                    <div class="square" style="background-color: hsl(151,70%,83%)"></div>-->
+<!--                    <div class="square" style="background-color: hsl(151,65%,73%)"></div>-->
+<!--                    <div class="square" style="background-color: hsl(151,60%,63%)"></div>-->
+<!--                    <div class="square" style="background-color: hsl(151,55%,53%)"></div>-->
                 </div>
-            </template>
         </MyBar>
 
         <MyBar barbackcolor='azure' barbordercolor='black'>
-            <template v-slot:title><b>Четыре</b></template>
-            <template v-slot:setofsquares>
-                <div class="square-container">
-                    <div class="square type4" style="background-color: hsl(331,100%,43%)"></div>
+            <template v-slot:title><b>nth-child(even){ align-self: flex-end }</b></template>
+                <div class="square-container ctr-4">
+                    <div class="square" style="background-color: hsl(331,100%,43%)"></div>
                     <div class="square" style="background-color: hsl(331,95%,53%)"></div>
                     <div class="square" style="background-color: hsl(331,90%,63%)"></div>
                     <div class="square" style="background-color: hsl(331,85%,73%)"></div>
@@ -70,7 +62,6 @@
                     <div class="square" style="background-color: hsl(331,60%,63%)"></div>
                     <div class="square" style="background-color: hsl(331,55%,53%)"></div>
                 </div>
-            </template>
         </MyBar>
 
     </div>
@@ -110,40 +101,46 @@ export default {
   .square-container {
       width: 100%;
       height: 100%;
-      //border-style: solid;
-      //border-color: gray;
-      //border-radius: 10px;
-      //margin: 3px 3px 3px;
 
-  }
-  .ctr-1 {
-      display: flex;
-      flex-flow: row nowrap;
+    &.ctr-1 {
+      display: flex ;
+      flex-flow: row wrap;
       justify-content: center;
       justify-content: space-between;
+    }
+    &.ctr-2 {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+    }
+    &.ctr-3 {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+      div:first-child {
+        align-self: center;
+      }
+      div:last-child {
+        align-self: flex-end;
+      }
+    }
+    &.ctr-4 {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+      div:nth-child(even){
+        align-self: flex-end;
+      }
+
+    }
   }
+
   .square {
-      width: 30px;
-      height: 30px;
+      width: 60px;
+      height: 60px;
       border-style: solid;
       //border-color: black;
       border-radius: 10%;
-
-      &.type1 {
-          border-color: hsl(271,100%,10%);
-      }
-
-      &.type2 {
-          border-color: green;
-      }
-
-      &.type3 {
-          border-color: blue;
-      }
-
-      &.type4 {
-          border-color: black;
-      }
   }
 
 }
