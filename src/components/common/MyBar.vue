@@ -5,7 +5,7 @@
             <slot name="title">Какой-то заголовок</slot>
         </div>
         <div class="barcontent">
-            <slot>Квадратики</slot>
+            <slot></slot>
         </div>
     </div>
 </template>
