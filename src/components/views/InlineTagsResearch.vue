@@ -2,22 +2,12 @@
     <div class="InlineTagsResearch">
         <h2>Inline Tags Research</h2>
 
-        <button class="my-btn" @click="inc(5)" >Increment</button>
-        <button class="my-btn" @click="inc(-3)" >Decrement</button>
+        <button class="btn-primary" @click="inc(5)" >Increment</button>
+        <button class="my-btn"@click="inc(-3)" >Decrement</button>
         <div class="part">
             <span class="one">{{ count }}</span>
         </div>
         <br>
-<!--        <button class="my-btn">показать значения</button>-->
-<!--        <button class="my-btn">скрыть значения</button>-->
-
-<!--        <div class="colormassive" v-for="onecolor in somecolors1">-->
-<!--            <div>{{onecolor.name}}</div>-->
-<!--        </div>-->
-<!--        <div class="colormassive">-->
-<!--            <div>{{somecolors2}}</div>-->
-
-<!--        </div>-->
 
 
     </div>
@@ -65,16 +55,19 @@ export default {
   width: 100%;
   height: auto;
 
+
   .my-btn {
     margin: 5px 15px 20px;
     background-color: floralwhite;
   }
+
   .my-btn:hover {
     background-color: cornflowerblue;
   }
+
   .colormassive {
     color: black;
   }
-
 }
+
 </style>

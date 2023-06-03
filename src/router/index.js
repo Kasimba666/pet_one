@@ -4,7 +4,7 @@ import HomeView from '@/components/views/HomeView.vue';
 import FlexResearch from '@/components/views/FlexResearch.vue';
 import BlockTagsResearch from '@/components/views/BlockTagsResearch.vue';
 import InlineTagsResearch from '@/components/views/InlineTagsResearch.vue';
-import HelloWorld from '@/components/views/HelloWorld.vue';
+import JSResearch from '@/components/views/JSResearch.vue';
 
 Vue.use(VueRouter)
 
@@ -13,7 +13,7 @@ const routes = [
     path: '/',
     name: 'HomeView',
     component: HomeView,
-    redirect: {name: 'HelloWorld'},
+    redirect: {name: 'JSResearch'},
     children: [
       {
         path: 'flex',
@@ -31,9 +31,9 @@ const routes = [
         component: InlineTagsResearch,
       },
       {
-        path: 'hello',
-        name: 'HelloWorld',
-        component: HelloWorld,
+        path: 'js',
+        name: 'JSResearch',
+        component: JSResearch,
       },
     ],
   },
