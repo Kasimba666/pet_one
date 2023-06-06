@@ -3,7 +3,9 @@
     <div class="grid">
       <MyBar barbackcolor='azure' barbordercolor='black'>
         <template v-slot:title><b>Один</b></template>
-
+          {{ numbers}}<br>
+          {{ mappedNums}}<br>
+          {{reducedNums}}
       </MyBar>
       <MyBar barbackcolor='azure' barbordercolor='black'>
         <template v-slot:title><b>Два</b></template>
@@ -33,10 +35,27 @@ export default {
   components: {MyBar},
   props: { },
   data() {
-    return {}
+
+    return {
+        numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+
+    }
   },
-  computed: {},
-  methods: {},
+  computed: {
+    mappedNums(){
+      return this.numbers.map((v, i, a)=>{
+          return v + (a[i-1] || 1 );
+      });
+    },
+      reducedNums(){
+      return this.numbers.reduce((s, v, i, a)=>{
+          return s + v;
+      }, 0);
+    },
+  },
+  methods: {
+
+  },
   mounted() {
   },
 }
@@ -61,7 +80,7 @@ export default {
     &.ctr-1 {
       display: flex;
       flex-flow: row wrap;
-      justify-content: center;
+
       justify-content: space-between;
     }
 
@@ -70,7 +89,7 @@ export default {
       flex-flow: row wrap;
       gap: 20px 10px;
       justify-content: space-around;
-      align-items: start4;
+      align-items: start;
       align-content: center;
 
       div:nth-child(even) {

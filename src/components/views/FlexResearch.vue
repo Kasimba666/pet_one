@@ -108,7 +108,7 @@ export default {
       flex-flow: row wrap;
       gap: 20px 10px;
       justify-content: space-around;
-      align-items: start4;
+      align-items: end;
       align-content: center;
       div:nth-child(even){
         height: 20px;
