@@ -3,6 +3,7 @@
     <nav>
       <router-link :to="{name: 'HomeView'}">Home</router-link> |
       <router-link :to="{name: 'JSResearch'}">JS</router-link>  |
+      <router-link :to="{name: 'CSSResearch'}">CSS</router-link>  |
       <router-link :to="{name: 'FlexResearch'}">Flex</router-link> |
       <router-link :to="{name: 'BlockTagsResearch'}">Block</router-link> |
       <router-link :to="{name: 'InlineTagsResearch'}">Inline</router-link>  |

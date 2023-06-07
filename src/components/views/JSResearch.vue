@@ -5,7 +5,12 @@
         <template v-slot:title><b>Один</b></template>
           {{ numbers}}<br>
           {{ mappedNums}}<br>
-          {{reducedNums}}
+          {{reducedNums}}<br>
+          {{ mapNums(numbers) }}<br>
+          {{ reduceNums(numbers) }}<br>
+          {{ reduceNums(mapNums(numbers)) }} <br>
+          {{ unsortedNums }} <br>
+          {{ sortNums(unsortedNums) }}
       </MyBar>
       <MyBar barbackcolor='azure' barbordercolor='black'>
         <template v-slot:title><b>Два</b></template>
@@ -35,26 +40,45 @@ export default {
   components: {MyBar},
   props: { },
   data() {
-
     return {
         numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-
     }
   },
-  computed: {
-    mappedNums(){
-      return this.numbers.map((v, i, a)=>{
-          return v + (a[i-1] || 1 );
-      });
-    },
-      reducedNums(){
-      return this.numbers.reduce((s, v, i, a)=>{
-          return s + v;
-      }, 0);
-    },
-  },
-  methods: {
+    computed: {
+        mappedNums() {
+            return this.numbers.map((v, i, a) => {
+                return v + (a[i - 1] || 1);
+            });
+        },
+        reducedNums() {
+            return this.numbers.reduce((s, v, i, a) => {
+                return s + v;
+            }, 0);
+        },
 
+        unsortedNums() {
+            let arr = [];
+            for (let i = 0; i < 10; i++) {
+                arr.push(Math.round(Math.random()*100));
+            };
+            return arr;
+        },
+
+    },
+  methods: {
+      mapNums: function(arr) {
+          return arr.map((v, i, a) => {
+              return v + (a[i - 1] || 1)
+          })
+      },
+      reduceNums: function(arr) {
+          return arr.reduce((s, v, i, a)=>{
+              return s + v;
+          }, 0);
+      },
+      sortNums: function(arr) {
+        return arr.sort((a,b)=>{return a-b})
+      },
   },
   mounted() {
   },

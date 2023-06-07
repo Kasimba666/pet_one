@@ -5,6 +5,7 @@ import FlexResearch from '@/components/views/FlexResearch.vue';
 import BlockTagsResearch from '@/components/views/BlockTagsResearch.vue';
 import InlineTagsResearch from '@/components/views/InlineTagsResearch.vue';
 import JSResearch from '@/components/views/JSResearch.vue';
+import CSSResearch from '@/components/views/CSSResearch.vue';
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,11 @@ const routes = [
         path: 'js',
         name: 'JSResearch',
         component: JSResearch,
+      },
+      {
+        path: 'css',
+        name: 'CSSResearch',
+        component: CSSResearch,
       },
     ],
   },
