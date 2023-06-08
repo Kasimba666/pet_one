@@ -32,19 +32,21 @@ export default {
   height: auto;
   border-style: solid;
   position: relative;
+  display: flex;
+  flex-flow: column;
+
   .bardescription {
-     background: ghostwhite;
-     //border-style: solid;
-     //border-color: grey;
-     padding: 3px;
-     margin: 3px 3px 3px;
+    height: 20px;
+    background: ghostwhite;
+    padding: 3px;
+    margin: 3px 3px 3px;
   }
+
   .barcontent {
-      height: 350px;
-      //border-style: solid;
-      //border-color: grey;
-      //margin: 3px 3px 3px;
-      //position: relative;
+    //height: auto;
+    //min-height: 200px;
+    flex: 1 1 auto;
+
   }
 }
 </style>

@@ -109,7 +109,7 @@ export default {
       gap: 20px 10px;
       justify-content: space-around;
       align-items: end;
-      align-content: center;
+      //align-content: center;
       div:nth-child(even){
         height: 20px;
       }
