@@ -1,0 +1,18 @@
+button {
+  border: none;
+  border: 1px solid red;
+  cursor: pointer;
+}
+
+.btn-primary {
+  width: auto;
+  height: 30px;
+  background-color: bisque;
+  //display: flex;
+  //align-items: center;
+
+  //border-color: darkgrey;
+  border-radius: 5px;
+  padding: 0 20px;
+  margin: 0;
+}

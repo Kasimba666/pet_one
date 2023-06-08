@@ -5,14 +5,14 @@
                 <template v-slot:title><b>Один</b></template>
               <div class="block-1">
                 <div class="top">
-                  <button class="btn-primary btn-main">Кнопка</button>
+                  <btn class="btn-primary">Кнопка</btn>
                   <div class="menu">
                     <button class="btn-menu">Кнопка</button>
                     <button class="btn-menu">Кнопка</button>
                     <button class="btn-menu">Кнопка</button>
                   </div>
                 </div>
-                <div class="content">
+                <div class="middle">
 
                 </div>
                 <div class="bottom"></div>
@@ -86,11 +86,11 @@ export default {
     height: 30px;
     border-style: solid;
     border-color: darkgray;
-    position: relative;
+//display: flex;
 
   }
 
-  .content {
+  .middle {
     flex: 1 1 auto;
     min-height: 100px;
     border-style: solid;
@@ -104,12 +104,8 @@ export default {
   }
 
   .btn-main {
-    position: relative;
     background-color: white;
     height: 25px;
-    vertical-align: middle;
-
-
   }
 
   .btn-menu {
@@ -125,10 +121,10 @@ export default {
     background-color: powderblue;
     display: none;
     flex-flow: column;
-    justify-content: left;
+    justify-content: center;
   }
 
-  .btn-main:hover {
+  .btn-primary:hover {
     background-color: chartreuse;
   }
 

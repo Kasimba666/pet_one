@@ -28,7 +28,7 @@ export default {
 <style lang="scss">
 /****  MyBar  ****/
 .MyBar {
-  width: 100%;
+  width: auto;
   height: auto;
   border-style: solid;
   position: relative;
