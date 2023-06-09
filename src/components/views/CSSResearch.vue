@@ -3,31 +3,38 @@
         <div class="grid">
             <MyBar barbackcolor='azure' barbordercolor='black'>
               <template v-slot:title><b>Один</b></template>
-              <div class="block-1">
+              <div class="block">
                 <div class="top">
-                  <button class="btn-primary" v-for="menubtn in menubtns">
+                  <button class="top-menu-btn btn-primary" v-for="menubtn in menubtns">
                     {{menubtn.title}}
-                    <template class="menu" v-if="menubtn.children.length !== 0")>
-                      <button class="btn-primary" v-for="childmenubtn in menubtn.children">
+                    <div class="menu-dropdown" v-if="menubtn.children.length" >
+                      <button class="btn-menu" v-for="childmenubtn in menubtn.children"
+                      @click="menuClick(childmenubtn)">
                         {{childmenubtn.title}}
                       </button>
-                    </template>
+                    </div>
                   </button>
 
                 </div>
                 <div class="middle"></div>
                 <div class="bottom"></div>
               </div>
-
             </MyBar>
             <MyBar barbackcolor='azure' barbordercolor='black'>
                 <template v-slot:title><b>Два</b></template>
-
             </MyBar>
 
             <MyBar barbackcolor='azure' barbordercolor='black'>
                 <template v-slot:title><b>Три</b></template>
+                <div class="block">
+                    <div class="top">
+                      <HorMenu :menuItems="menubtns">
 
+                      </HorMenu>
+                    </div>
+                    <div class="middle"></div>
+                    <div class="bottom"></div>
+                </div>
             </MyBar>
 
             <MyBar barbackcolor='azure' barbordercolor='black'>
@@ -41,10 +48,11 @@
 
 <script>
 import MyBar from "@/components/common/MyBar.vue";
+import HorMenu from "@/components/common/HorMenu.vue";
 
 export default {
   name: "CSSResearch",
-  components: {MyBar},
+  components: {MyBar, HorMenu},
   props: [],
   data() {
 
@@ -126,7 +134,11 @@ export default {
   }
   },
     computed: {},
-    methods: {},
+    methods: {
+        menuClick(v) {
+            console.log('menuClick=>>',v);
+        },
+    },
     mounted() {
     },
 }
@@ -148,7 +160,7 @@ export default {
     row-gap: 10px;
   }
 
-  .block-1 {
+  .block {
     position: relative;
     width: 100%;
     height: 100%;
@@ -160,13 +172,13 @@ export default {
   }
 
   .top {
+    position: relative;
     height: 20px;
     border-style: solid;
     border-color: darkgray;
     display: flex;
+    flex-flow: row nowrap;
     justify-content: left;
-
-
   }
 
   .middle {
@@ -182,34 +194,40 @@ export default {
     border-color: darkgray;
   }
 
-  .btn-main {
+  .top-menu-btn {
+    position: relative;
     background-color: white;
     height: 25px;
+    &:hover .menu-dropdown {
+      display: flex;
+    }
   }
 
   .btn-menu {
-
+    background-color:floralwhite;
+    border-color: darkgray;
+    height: 30px;
+    &:hover {
+      background-color: cornflowerblue;
+    }
   }
 
-  .menu {
+  .menu-dropdown {
     position: absolute;
-    top: 20px;
-    left: 10px;
-    width: auto;
+    top: 100%;
+    left: 0px;
+    width: 100%;
     height: auto;
     background-color: powderblue;
-    display: flex;
     flex-flow: column;
     justify-content: center;
+    display: none;
   }
 
   .btn-primary:hover {
     background-color: chartreuse;
   }
 
-  .top:hover .menu {
-    display: flex;
-  }
 
 }
 </style>
