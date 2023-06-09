@@ -2,19 +2,20 @@
     <div class="CSSResearch">
         <div class="grid">
             <MyBar barbackcolor='azure' barbordercolor='black'>
-                <template v-slot:title><b>Один</b></template>
+              <template v-slot:title><b>Один</b></template>
               <div class="block-1">
                 <div class="top">
-                  <btn class="btn-primary">Кнопка</btn>
-                  <div class="menu">
-                    <button class="btn-menu">Кнопка</button>
-                    <button class="btn-menu">Кнопка</button>
-                    <button class="btn-menu">Кнопка</button>
-                  </div>
-                </div>
-                <div class="middle">
+                  <button class="btn-primary" v-for="menubtn in menubtns">
+                    {{menubtn.title}}
+                    <template class="menu" v-if="menubtn.children.length !== 0")>
+                      <button class="btn-primary" v-for="childmenubtn in menubtn.children">
+                        {{childmenubtn.title}}
+                      </button>
+                    </template>
+                  </button>
 
                 </div>
+                <div class="middle"></div>
                 <div class="bottom"></div>
               </div>
 
@@ -42,12 +43,88 @@
 import MyBar from "@/components/common/MyBar.vue";
 
 export default {
-    name: "CSSResearch",
-    components: {MyBar},
-    props: [],
-    data() {
-        return {}
-    },
+  name: "CSSResearch",
+  components: {MyBar},
+  props: [],
+  data() {
+
+    return {
+      menubtns: [
+        {
+          id: "1",
+          name: "btn1",
+          title: "Кнопка 1",
+          children:[
+            {
+              id: "11",
+              name: "btn11",
+              title: "Кнопка 11",
+              children:[]
+            },              {
+              id: "12",
+              name: "btn12",
+              title: "Кнопка 12",
+              children:[]
+            },              {
+              id: "13",
+              name: "btn13",
+              title: "Кнопка 13",
+              children:[]
+            },              {
+              id: "14",
+              name: "btn14",
+              title: "Кнопка 14",
+              children:[]
+            }
+          ]
+        },
+        {
+          id: "2",
+          name: "btn2",
+          title: "Кнопка 2",
+          children:[]
+       },
+        {
+          id: "3",
+          name: "btn3",
+          title: "Кнопка 3",
+          children:[
+            {
+              id: "31",
+              name: "btn31",
+              title: "Кнопка 31",
+              children:[]
+            },
+            {
+              id: "32",
+              name: "btn32",
+              title: "Кнопка 32",
+              children:[]
+            },
+            {
+              id: "33",
+              name: "btn33",
+              title: "Кнопка 33",
+              children:[]
+            },
+            {
+              id: "34",
+              name: "btn34",
+              title: "Кнопка 34",
+              children:[]
+            }
+          ]
+       },
+        {
+          id: "4",
+          name: "btn4",
+          title: "Кнопка 4",
+          children:[]
+        }
+      ]
+
+  }
+  },
     computed: {},
     methods: {},
     mounted() {
@@ -83,10 +160,12 @@ export default {
   }
 
   .top {
-    height: 30px;
+    height: 20px;
     border-style: solid;
     border-color: darkgray;
-//display: flex;
+    display: flex;
+    justify-content: left;
+
 
   }
 
@@ -119,7 +198,7 @@ export default {
     width: auto;
     height: auto;
     background-color: powderblue;
-    display: none;
+    display: flex;
     flex-flow: column;
     justify-content: center;
   }
