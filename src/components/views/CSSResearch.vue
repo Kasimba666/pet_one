@@ -1,49 +1,34 @@
 <template>
-    <div class="CSSResearch">
-        <div class="grid">
-            <MyBar barbackcolor='azure' barbordercolor='black'>
-              <template v-slot:title><b>Один</b></template>
-              <div class="block">
-                <div class="top">
-                  <button class="top-menu-btn btn-primary" v-for="menubtn in menubtns">
-                    {{menubtn.title}}
-                    <div class="menu-dropdown" v-if="menubtn.children.length" >
-                      <button class="btn-menu" v-for="childmenubtn in menubtn.children"
-                      @click="menuClick(childmenubtn)">
-                        {{childmenubtn.title}}
-                      </button>
-                    </div>
-                  </button>
-
-                </div>
-                <div class="middle"></div>
-                <div class="bottom"></div>
-              </div>
-            </MyBar>
-            <MyBar barbackcolor='azure' barbordercolor='black'>
-                <template v-slot:title><b>Два</b></template>
-            </MyBar>
-
-            <MyBar barbackcolor='azure' barbordercolor='black'>
-                <template v-slot:title><b>Три</b></template>
-                <div class="block">
-                    <div class="top">
-                      <HorMenu :menuItems="menubtns">
-
-                      </HorMenu>
-                    </div>
-                    <div class="middle"></div>
-                    <div class="bottom"></div>
-                </div>
-            </MyBar>
-
-            <MyBar barbackcolor='azure' barbordercolor='black'>
-                <template v-slot:title><b>Четыре</b></template>
-
-            </MyBar>
-
+  <div class="CSSResearch">
+    <div class="grid">
+      <MyBar barbackcolor='azure' barbordercolor='black'>
+        <template v-slot:title><b>Один</b></template>
+        <div class="block">
+          <div class="top">
+            <HorMenu :menuItems="petMenu" @showItem="showItem"></HorMenu>
+          </div>
+          <div class="middle"></div>
+          <div class="bottom">
+            {{ currentItemTitle }}
+          </div>
         </div>
+      </MyBar>
+
+      <MyBar barbackcolor='azure' barbordercolor='black'>
+        <template v-slot:title><b>Два</b></template>
+      </MyBar>
+
+      <MyBar barbackcolor='azure' barbordercolor='black'>
+        <template v-slot:title><b>Три</b></template>
+      </MyBar>
+
+      <MyBar barbackcolor='azure' barbordercolor='black'>
+        <template v-slot:title><b>Четыре</b></template>
+
+      </MyBar>
+
     </div>
+  </div>
 </template>
 
 <script>
@@ -57,32 +42,76 @@ export default {
   data() {
 
     return {
-      menubtns: [
+      petMenu: [
         {
           id: "1",
           name: "btn1",
           title: "Кнопка 1",
-          children:[
+          children: [
             {
               id: "11",
               name: "btn11",
               title: "Кнопка 11",
-              children:[]
-            },              {
+              children: [
+                {
+                  id: "111",
+                  name: "btn111",
+                  title: "Кнопка 111",
+                  children: []
+                }, {
+                  id: "112",
+                  name: "btn112",
+                  title: "Кнопка 112",
+                  children: []
+                }, {
+                  id: "113",
+                  name: "btn113",
+                  title: "Кнопка 113",
+                  children: []
+                }, {
+                  id: "114",
+                  name: "btn114",
+                  title: "Кнопка 114",
+                  children: []
+                }
+              ]
+            }, {
               id: "12",
               name: "btn12",
               title: "Кнопка 12",
-              children:[]
-            },              {
+              children: [
+                {
+                  id: "121",
+                  name: "btn121",
+                  title: "Кнопка 121",
+                  children: []
+                }, {
+                  id: "122",
+                  name: "btn122",
+                  title: "Кнопка 122",
+                  children: []
+                }, {
+                  id: "123",
+                  name: "btn123",
+                  title: "Кнопка 123",
+                  children: []
+                }, {
+                  id: "124",
+                  name: "btn124",
+                  title: "Кнопка 124",
+                  children: []
+                }
+              ]
+            }, {
               id: "13",
               name: "btn13",
               title: "Кнопка 13",
-              children:[]
-            },              {
+              children: []
+            }, {
               id: "14",
               name: "btn14",
               title: "Кнопка 14",
-              children:[]
+              children: []
             }
           ]
         },
@@ -90,65 +119,86 @@ export default {
           id: "2",
           name: "btn2",
           title: "Кнопка 2",
-          children:[]
-       },
+          children: []
+        },
         {
           id: "3",
           name: "btn3",
           title: "Кнопка 3",
-          children:[
+          children: [
             {
               id: "31",
               name: "btn31",
               title: "Кнопка 31",
-              children:[]
+              children: []
             },
             {
               id: "32",
               name: "btn32",
               title: "Кнопка 32",
-              children:[]
+              children: []
             },
             {
               id: "33",
               name: "btn33",
               title: "Кнопка 33",
-              children:[]
+              children: []
             },
             {
               id: "34",
               name: "btn34",
               title: "Кнопка 34",
-              children:[]
+              children: [{
+                id: "341",
+                name: "btn341",
+                title: "Кнопка 341",
+                children: []
+              }, {
+                id: "342",
+                name: "btn342",
+                title: "Кнопка 342",
+                children: []
+              }, {
+                id: "343",
+                name: "btn343",
+                title: "Кнопка 343",
+                children: []
+              }, {
+                id: "344",
+                name: "btn344",
+                title: "Кнопка 344",
+                children: []
+              }]
             }
           ]
-       },
+        },
         {
           id: "4",
           name: "btn4",
           title: "Кнопка 4",
-          children:[]
+          children: []
         }
-      ]
-
-  }
+      ],
+      currentItemTitle: '',
+    }
   },
-    computed: {},
-    methods: {
-        menuClick(v) {
-            console.log('menuClick=>>',v);
-        },
+  computed: {},
+  methods: {
+    showItem(v)
+    {
+      this.currentItemTitle = v.title;
     },
-    mounted() {
-    },
+  },
+  mounted() {
+  },
 }
 </script>
 
 <style lang="scss">
 /****  CSSResearch  ****/
 .CSSResearch {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 
   .grid {
     position: relative;
@@ -183,51 +233,16 @@ export default {
 
   .middle {
     flex: 1 1 auto;
-    min-height: 100px;
+    min-height: 200px;
     border-style: solid;
     border-color: darkgray;
   }
 
   .bottom {
-    height: 30px;
+    height: 20px;
     border-style: solid;
     border-color: darkgray;
   }
-
-  .top-menu-btn {
-    position: relative;
-    background-color: white;
-    height: 25px;
-    &:hover .menu-dropdown {
-      display: flex;
-    }
-  }
-
-  .btn-menu {
-    background-color:floralwhite;
-    border-color: darkgray;
-    height: 30px;
-    &:hover {
-      background-color: cornflowerblue;
-    }
-  }
-
-  .menu-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0px;
-    width: 100%;
-    height: auto;
-    background-color: powderblue;
-    flex-flow: column;
-    justify-content: center;
-    display: none;
-  }
-
-  .btn-primary:hover {
-    background-color: chartreuse;
-  }
-
 
 }
 </style>
