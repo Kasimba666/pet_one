@@ -7,7 +7,6 @@ import App from './App.vue'
 Vue.config.productionTip = false
 import "@/assets/css/petstyle.scss"
 
-
 new Vue({
   router,
   store,
