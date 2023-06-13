@@ -18,7 +18,11 @@
         <template v-slot:title><b>Два</b></template>
         <div class="block">
           <div class="top">
-            <simpleHorMenu :menuitem="petMenu" @currentItem="showCurrentItemTitle"/>
+            <simpleHorMenu
+                style="display: flex; left: 0"
+                :menuitem="petMenu"
+                :level="0"
+                @currentItem="showCurrentItemTitle"/>
           </div>
           <div class="middle"></div>
           <div class="bottom">
@@ -81,6 +85,12 @@ export default {
     column-gap: 10px;
     grid-template-rows: 1fr 1fr;
     row-gap: 10px;
+    & > * {
+      z-index: 0;
+    }
+    & > *:hover {
+      z-index: 10;
+    }
   }
 
   .block {
