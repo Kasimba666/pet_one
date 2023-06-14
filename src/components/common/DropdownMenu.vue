@@ -2,7 +2,11 @@
     <div class="dropdown-menu" >
         <div class="dropdown-menu-item" v-for="item in menuitem.children" @click="itemClick(item, $event)">
             {{ item.title }}
-            <DropdownMenu v-if="menuitem?.children?.length" :menuitem="item" :level="level+1"/>
+            <DropdownMenu v-if="menuitem?.children?.length"
+                          :menuitem="item"
+                          :level="level+1"
+            @clickItem="(v)=>$emit('clickItem', v)"
+            />
         </div>
     </div>
 </template>
@@ -20,9 +24,9 @@ export default {
     methods: {
         itemClick(v, e) {
             // e.stopPropagation();
-            if (!v.children.length) {
-                this.$emit('currentItem', v);
-                console.log(v.title);
+            if (!v?.children.length) {
+                this.$emit('clickItem', v);
+                // console.log(v.title);
                 // this.closeAll = true;
                 // setTimeout(() => {
                 //     this.closeAll = false;
@@ -54,7 +58,7 @@ export default {
   //  .dropdown-menu-item:hover > .dropdown-menu {
   //    display: none;
   //  }
-  }
+  //}
 
 
 

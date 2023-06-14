@@ -7,6 +7,7 @@
           style="left: 0; top: 100%"
           :level="0"
           :menuitem="item"
+          @clickItem="itemClick"
           />
     </div>
   </div>
@@ -28,7 +29,7 @@ export default {
   methods: {
     itemClick(v, e) {
       // e.stopPropagation();
-      if (!v.children.length) {
+      if (!v?.children.length) {
         this.$emit('currentItem', v);
         console.log(v.title);
         this.closeAll = true;
@@ -59,8 +60,8 @@ export default {
     gap: 10px;
     z-index: 0;
 
-    .close-all {
-      .horizontal-menu-item:hover  > .dropdown-menu {
+    &.close-all {
+      .horizontal-menu-item:hover > .dropdown-menu {
         display: none;
       }
     }
