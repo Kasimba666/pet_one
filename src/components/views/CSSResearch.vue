@@ -18,10 +18,8 @@
         <template v-slot:title><b>Два</b></template>
         <div class="block">
           <div class="top">
-            <simpleHorMenu
-                style="display: flex; left: 0"
+            <HorizontalMenu
                 :menuitem="petMenu"
-                :level="0"
                 @currentItem="showCurrentItemTitle"/>
           </div>
           <div class="middle"></div>
@@ -47,12 +45,12 @@
 <script>
 import MyBar from "@/components/common/MyBar.vue";
 import HorMenu from "@/components/common/HorMenu.vue";
-import simpleHorMenu from "@/components/common/simpleHorMenu.vue";
+import HorizontalMenu from "@/components/common/HorizontalMenu.vue";
 import {treeItems} from "@/data/data.js";
 
 export default {
   name: "CSSResearch",
-  components: {MyBar, HorMenu, simpleHorMenu},
+  components: {MyBar, HorMenu, HorizontalMenu},
   props: [],
   data() {
     return {
