@@ -1,18 +1,7 @@
 <template>
   <div class="CSSResearch">
     <div class="grid">
-<!--      <MyBar barbackcolor='azure' barbordercolor='black'>-->
-<!--        <template v-slot:title><b>Один</b></template>-->
-<!--        <div class="block">-->
-<!--          <div class="top">-->
-<!--            <HorMenu :menuItems="petMenu.children" @currentItem="showCurrentItemTitle"/>-->
-<!--          </div>-->
-<!--          <div class="middle"></div>-->
-<!--          <div class="bottom">-->
-<!--            {{ currentItemTitle }}-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </MyBar>-->
+
       <MyBar barbackcolor='azure' barbordercolor='black'>
         <template v-slot:title><b>Два</b></template>
         <div class="block">
