@@ -10,7 +10,11 @@
                 :menuitem="petMenu"
                 @currentItem="showCurrentItemTitle"/>
           </div>
-          <div class="middle"></div>
+          <div class="middle">
+              <template v-for="imgsrc in sourceImgThombstones">
+                  <img style="height: 500px; width: 50px" :src="imgsrc"/>
+              </template>
+          </div>
           <div class="bottom">
             {{ currentItemTitle }}
           </div>
@@ -33,11 +37,11 @@
       <MyBar barbackcolor='azure' barbordercolor='black'>
         <template v-slot:title><b>Четыре</b></template>
         <div class="collection-images">
-<!--          <img :src="`${fullpathThombstones}`" class="my-image image-1"/>-->
-          <img src="@/assets/img/aldermysh_tombstone.png" class="my-image image-1"/>
+          <img :src="`${fullpathThombstones}`" class="my-image image-1"/>
+<!--          <img src="@/assets/img/aldermysh_tombstone.png" class="my-image image-1"/>-->
           <img src="@/assets/img/nizhmeteski_tombstone_2.png" class="my-image"/>
           <img src="@/assets/img/tuktamysh_tombstone_1.png" class="my-image"/>
-          <img src="@/assets/img/tuktamysh_tombstone_2.png" class="my-image"/>
+          <img src="/img/tuktamysh_tombstone_2.png" class="my-image"/>
         </div>
       </MyBar>
 
@@ -49,7 +53,7 @@
 import MyBar from "@/components/common/MyBar.vue";
 import HorizontalMenu from "@/components/common/HorizontalMenu.vue";
 import {treeItems} from "@/data/data.js";
-
+const pathImg = '@/assets/img/';
 export default {
   name: "CSSResearch",
   components: {MyBar, HorizontalMenu},
@@ -58,9 +62,17 @@ export default {
     return {
       petMenu: treeItems,
       currentItemTitle: '',
-      pathImg: '@/assets/img/',
-      fullpathThombstones: '@/assets/img/aldermysh_tombstone.png',
-      sourceImgThombstones: ['aldermysh_tombstone.png', 'nizhmeteski_tombstone_2.png', 'tuktamysh_tombstone_1.png', 'tuktamysh_tombstone_2.png'],
+      // pathImg: '@/assets/img/',
+      fullpathThombstones: require('@/assets/img/tuktamysh_tombstone_2.png'),
+      // sourceImgThombstones: [
+      //     'aldermysh_tombstone.png', 'nizhmeteski_tombstone_2.png', 'tuktamysh_tombstone_1.png', 'tuktamysh_tombstone_2.png']
+      //     .map(v=>require(pathImg+v)),
+      sourceImgThombstones: [
+          require('@/assets/img/aldermysh_tombstone.png'),
+          require('@/assets/img/nizhmeteski_tombstone_2.png'),
+          require('@/assets/img/tuktamysh_tombstone_1.png'),
+          require('@/assets/img/tuktamysh_tombstone_2.png'),
+      ],
     }
   },
   computed: {},
