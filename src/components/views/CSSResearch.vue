@@ -1,93 +1,167 @@
 <template>
-  <div class="CSSResearch">
-    <div class="grid">
+    <div class="CSSResearch">
+        <div class="grid">
 
-      <MyBar barbackcolor='azure' barbordercolor='black'>
-        <template v-slot:title><b>Меню</b></template>
-        <div class="block">
-          <div class="top">
-            <HorizontalMenu
-                :menuitem="petMenu"
-                @currentItem="showCurrentItemTitle"/>
-          </div>
-          <div class="middle">
+            <MyBar barbackcolor='azure' barbordercolor='black'>
+                <template v-slot:title><b>Меню</b></template>
+                <div class="block">
+                    <div class="top">
+                        <HorizontalMenu
+                                :menuitem="petMenu"
+                                @currentItem="showCurrentItemTitle"/>
+                    </div>
+                    <div class="middle">
+                        <div class="card">
+                            <div class="properties">
+                                <label for="dog_name">Имя:</label>
+                                <input id="dog_name"
+                                       v-model="dog.dog_name"
+                                       placeholder="введите имя собаки">
+                            </div>
 
-          </div>
-          <div class="bottom">
-            {{ currentItemTitle }}
-          </div>
+                            <div class="properties">
+                                <label for="dog_age">Возраст:</label>
+                                <input id="dog_age"
+                                       style="width: 100px"
+                                       v-model.number="dog.age"
+                                       type="range">
+
+                            </div>
+
+                            <div class="properties">
+                                <div v-for="sex in type_sex">
+                                    <input :id="sex" :value="sex"
+                                           type="radio" v-model="dog.sex">
+                                    <label for="sex">{{sex}}</label>
+                                </div>
+                            </div>
+
+                            <div class="properties">
+                                <label for="dog_size">Размер:</label>
+                                <select id="dog_size" v-model="dog.size">
+                                    <option v-for="size in type_size" v-bind:value="size">
+                                        {{ size }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="properties">
+                                <label for="dog_breed">Порода:</label>
+                                <select id="dog_breed" v-model="dog.breed">
+                                    <option v-for="breed in type_breed" v-bind:value="breed">
+                                        {{ breed }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="properties">
+                                <label for="dog_color">Цвет:</label>
+                                <select id="dog_color" v-model="dog.color" multiple>
+                                    <option v-for="color in type_color" v-bind:value="color">
+                                        {{ color }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="properties type-colors">
+                                <div v-for="color in type_color">
+                                    <input :id="color" :value="color" type="radio" v-model="dog.color">
+                                    <label for="color">{{ color }}</label>
+                                </div>
+                            </div>
+
+                            <div class="properties">
+                                <label for="dog_have_tail">Хвост:</label>
+                                <input id="dog_have_tail"
+                                       type="checkbox"
+                                       v-model="dog.have_tail">
+                            </div>
+                            <div class="properties">
+                                <label for="special_sign">Особые приметы:</label>
+                                <textarea
+                                        id="special_sign"
+                                        v-model.lazy="dog.special_signs"
+                                        placeholder="особые приметы">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bottom">
+                        {{ currentItemTitle }}
+                    </div>
+                </div>
+            </MyBar>
+
+            <MyBar barbackcolor='azure' barbordercolor='black'>
+                <template v-slot:title><b>Два</b></template>
+                <div class="collection-background-images">
+                    <div class="my-background-image" :class="`background-image-${i}`" v-for="i of 4"/>
+                </div>
+                <div class="collection-images">
+                    <img class="my-image image-1" :src="imgsrc" v-for="imgsrc in sourceImgThombstones"/>
+                </div>
+            </MyBar>
+
+            <MyBar barbackcolor='azure' barbordercolor='black'>
+                <template v-slot:title><b>Три</b></template>
+                {{ dog }}
+            </MyBar>
+
+            <MyBar barbackcolor='azure' barbordercolor='black'>
+                <template v-slot:title><b>Четыре</b></template>
+
+            </MyBar>
+
         </div>
-      </MyBar>
-
-      <MyBar barbackcolor='azure' barbordercolor='black'>
-        <template v-slot:title><b>Два</b></template>
-        <div class="collection-background-images">
-          <div class="my-background-image" :class="`background-image-${i}`" v-for="i of 4"/>
-        </div>
-        <div class="collection-images">
-        <img class="my-image image-1" :src="imgsrc" v-for="imgsrc in sourceImgThombstones"/>
-      </div>
-      </MyBar>
-
-      <MyBar barbackcolor='azure' barbordercolor='black'>
-        <template v-slot:title><b>Три</b></template>
-        <div class="form">
-          <div id="dog_name" class="properties">
-
-          </div>
-          <div id="dog_age" class="properties"></div>
-          <div id="dog_size" class="properties"></div>
-          <div id="dog_color" class="properties"></div>
-          <div id="dog_breed" class="properties"></div>
-          <div id="dog_result" class="result"></div>
-
-        </div>
-      </MyBar>
-
-      <MyBar barbackcolor='azure' barbordercolor='black'>
-        <template v-slot:title><b>Четыре</b></template>
-
-      </MyBar>
-
     </div>
-  </div>
 </template>
 
 <script>
 import MyBar from "@/components/common/MyBar.vue";
 import HorizontalMenu from "@/components/common/HorizontalMenu.vue";
 import {treeItems} from "@/data/data.js";
-
 export default {
-  name: "CSSResearch",
-  components: {MyBar, HorizontalMenu},
-  props: [],
-  data() {
-    return {
-      petMenu: treeItems,
-      currentItemTitle: '',
-      sourceImgThombstones: [
-          require('@/assets/img/aldermysh_tombstone.png'),
-          require('@/assets/img/nizhmeteski_tombstone_2.png'),
-          require('@/assets/img/tuktamysh_tombstone_1.png'),
-          require('@/assets/img/tuktamysh_tombstone_2.png'),
-      ],
-      dog: {name, age, weight, color, breed},
-      type_breed: ['unknown', 'pinscher', 'pomeranian spitz', 'fox'],
-      type_size: ['xs', 's', 'm', 'l', 'xl'],
-      type_color: ['gray', 'white', 'brown', 'mixed', 'transparent'],
-      type_hair: ['short', 'middle', 'long'],
-      dog_pride: [],
-    }
-  },
-  computed: {},
-  methods: {
-    showCurrentItemTitle: function (v) {
-      return this.currentItemTitle = v.title
+    name: "CSSResearch",
+    components: {MyBar, HorizontalMenu},
+    props: [],
+    data() {
+        return {
+            petMenu: treeItems,
+            currentItemTitle: '',
+            sourceImgThombstones: [
+                require('@/assets/img/aldermysh_tombstone.png'),
+                require('@/assets/img/nizhmeteski_tombstone_2.png'),
+                require('@/assets/img/tuktamysh_tombstone_1.png'),
+                require('@/assets/img/tuktamysh_tombstone_2.png'),
+            ],
+            inputed_value: 'nothing',
+
+            type_sex: ['male', 'female', 'other'],
+            type_breed: ['unknown', 'pinscher', 'pomeranian spitz', 'fox'],
+            type_size: ['xs', 's', 'm', 'l', 'xl'],
+            type_color: ['gray', 'white', 'brown', 'black', 'transparent'],
+            type_hair: ['short', 'middle', 'long'],
+            dog: {
+                dog_name: '',
+                sex: '',
+                age: '5',
+                size: 'xs',
+                color: 'gray',
+                breed: 'unknown',
+                have_tail: true,
+                special_signs: ''
+            },
+
+
+        }
     },
-  },
-  mounted() {
-  },
+    computed: {},
+    methods: {
+        showCurrentItemTitle: function (v) {
+            return this.currentItemTitle = v.title
+        },
+    },
+    mounted() {
+    },
 }
 </script>
 
@@ -178,6 +252,7 @@ export default {
 
     &.background-image-1 {
       background-image: url("@/assets/img/aldermysh_tombstone.png");
+
       &:hover {
         box-shadow: 0 0 10px 3px rgba(0, 140, 186, 0.5);
       }
@@ -185,6 +260,7 @@ export default {
 
     &.background-image-2 {
       background-image: url("@/assets/img/nizhmeteski_tombstone_2.png");
+
       &:hover {
         box-shadow: 0 0 10px 3px rgba(0, 140, 186, 0.5);
       }
@@ -192,6 +268,7 @@ export default {
 
     &.background-image-3 {
       background-image: url("@/assets/img/tuktamysh_tombstone_1.png");
+
       &:hover {
         box-shadow: 0 0 10px 3px rgba(0, 140, 186, 0.5);
       }
@@ -199,6 +276,7 @@ export default {
 
     &.background-image-4 {
       background-image: url("@/assets/img/tuktamysh_tombstone_2.png");
+
       &:hover {
         box-shadow: 0 0 10px 3px rgba(0, 140, 186, 0.5);
       }
@@ -249,35 +327,23 @@ export default {
     }
   }
 
-  .overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  .card {
     height: 100%;
     width: 100%;
-    opacity: 0;
-    transition: .5s ease;
-    background-color: #008CBA;
-  }
-
-  .single-image {
-    max-width: 100%;
-    height: auto;
-    opacity: 90%;
-    &:hover {
-    opacity: 100%;
-  }
-  }
-  .form {
-    height: 100%;
     display: flex;
     flex-flow: column;
 
     .properties {
-      border-style: solid;
-      border-color: gray;
+      padding: 5px;
+      width: 50%;
+      display: flex;
+      flex-flow: row;
+      //border-style: solid;
+      //border-color: gray;
+      &.type-colors {
+        display: flex;
+        flex-flow: column;
+      }
     }
   }
 
