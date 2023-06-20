@@ -11,9 +11,7 @@
                 @currentItem="showCurrentItemTitle"/>
           </div>
           <div class="middle">
-              <template v-for="imgsrc in sourceImgThombstones">
-                  <img style="height: 500px; width: 50px" :src="imgsrc"/>
-              </template>
+
           </div>
           <div class="bottom">
             {{ currentItemTitle }}
@@ -25,24 +23,30 @@
         <template v-slot:title><b>Два</b></template>
         <div class="collection-background-images">
           <div class="my-background-image" :class="`background-image-${i}`" v-for="i of 4"/>
-
         </div>
+        <div class="collection-images">
+        <img class="my-image image-1" :src="imgsrc" v-for="imgsrc in sourceImgThombstones"/>
+      </div>
       </MyBar>
 
       <MyBar barbackcolor='azure' barbordercolor='black'>
         <template v-slot:title><b>Три</b></template>
-        <img src="@/assets/img/aldermysh_6000.jpg" class="single-image"/>
+        <div class="form">
+          <div id="dog_name" class="properties">
+
+          </div>
+          <div id="dog_age" class="properties"></div>
+          <div id="dog_size" class="properties"></div>
+          <div id="dog_color" class="properties"></div>
+          <div id="dog_breed" class="properties"></div>
+          <div id="dog_result" class="result"></div>
+
+        </div>
       </MyBar>
 
       <MyBar barbackcolor='azure' barbordercolor='black'>
         <template v-slot:title><b>Четыре</b></template>
-        <div class="collection-images">
-          <img :src="`${fullpathThombstones}`" class="my-image image-1"/>
-<!--          <img src="@/assets/img/aldermysh_tombstone.png" class="my-image image-1"/>-->
-          <img src="@/assets/img/nizhmeteski_tombstone_2.png" class="my-image"/>
-          <img src="@/assets/img/tuktamysh_tombstone_1.png" class="my-image"/>
-          <img src="/img/tuktamysh_tombstone_2.png" class="my-image"/>
-        </div>
+
       </MyBar>
 
     </div>
@@ -53,7 +57,7 @@
 import MyBar from "@/components/common/MyBar.vue";
 import HorizontalMenu from "@/components/common/HorizontalMenu.vue";
 import {treeItems} from "@/data/data.js";
-const pathImg = '@/assets/img/';
+
 export default {
   name: "CSSResearch",
   components: {MyBar, HorizontalMenu},
@@ -62,17 +66,18 @@ export default {
     return {
       petMenu: treeItems,
       currentItemTitle: '',
-      // pathImg: '@/assets/img/',
-      fullpathThombstones: require('@/assets/img/tuktamysh_tombstone_2.png'),
-      // sourceImgThombstones: [
-      //     'aldermysh_tombstone.png', 'nizhmeteski_tombstone_2.png', 'tuktamysh_tombstone_1.png', 'tuktamysh_tombstone_2.png']
-      //     .map(v=>require(pathImg+v)),
       sourceImgThombstones: [
           require('@/assets/img/aldermysh_tombstone.png'),
           require('@/assets/img/nizhmeteski_tombstone_2.png'),
           require('@/assets/img/tuktamysh_tombstone_1.png'),
           require('@/assets/img/tuktamysh_tombstone_2.png'),
       ],
+      dog: {name, age, weight, color, breed},
+      type_breed: ['unknown', 'pinscher', 'pomeranian spitz', 'fox'],
+      type_size: ['xs', 's', 'm', 'l', 'xl'],
+      type_color: ['gray', 'white', 'brown', 'mixed', 'transparent'],
+      type_hair: ['short', 'middle', 'long'],
+      dog_pride: [],
     }
   },
   computed: {},
@@ -114,7 +119,7 @@ export default {
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: lightyellow;
+
     display: flex;
     flex-flow: column nowrap;
     gap: 2px;
@@ -129,6 +134,7 @@ export default {
     display: flex;
     flex-flow: row nowrap;
     justify-content: left;
+    background-color: lightyellow;
   }
 
   .middle {
@@ -136,29 +142,30 @@ export default {
     min-height: 200px;
     border-style: solid;
     border-color: darkgray;
+
   }
 
   .bottom {
     height: 20px;
     border-style: solid;
     border-color: darkgray;
+    background-color: lightyellow;
   }
 
   .collection-background-images {
 
     position: relative;
+    height: 50%;
     display: flex;
     flex-flow: row;
     justify-content: space-around;
-    //justify-content: center;
     gap: 10px;
-
   }
 
   .my-background-image {
-    flex: 0 1 auto;
-    width: 150px;
-    height: 300px;
+    flex: 1 1 auto;
+    width: 100px;
+    height: 200px;
     min-width: 20px;
     min-height: 60px;
     border-style: solid;
@@ -167,28 +174,40 @@ export default {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    align-self: center;
 
     &.background-image-1 {
       background-image: url("@/assets/img/aldermysh_tombstone.png");
-      //background-image: url("/img/aldermysh_tombstone.png");
+      &:hover {
+        box-shadow: 0 0 10px 3px rgba(0, 140, 186, 0.5);
+      }
     }
 
     &.background-image-2 {
       background-image: url("@/assets/img/nizhmeteski_tombstone_2.png");
+      &:hover {
+        box-shadow: 0 0 10px 3px rgba(0, 140, 186, 0.5);
+      }
     }
 
     &.background-image-3 {
       background-image: url("@/assets/img/tuktamysh_tombstone_1.png");
+      &:hover {
+        box-shadow: 0 0 10px 3px rgba(0, 140, 186, 0.5);
+      }
     }
 
     &.background-image-4 {
       background-image: url("@/assets/img/tuktamysh_tombstone_2.png");
+      &:hover {
+        box-shadow: 0 0 10px 3px rgba(0, 140, 186, 0.5);
+      }
     }
   }
 
   .collection-images {
-
     position: relative;
+    height: 50%;
     display: flex;
     flex-flow: row;
     justify-content: space-around;
@@ -198,9 +217,9 @@ export default {
   }
 
   .my-image {
-    flex: 0 1 auto;
-    width: 150px;
-    height: 300px;
+    flex: 0 0 auto;
+    width: 100px;
+    height: 200px;
     min-width: 20px;
     min-height: 60px;
     border-style: solid;
@@ -209,6 +228,7 @@ export default {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    align-items: center;
 
     &.image-1 {
       &:hover {
@@ -250,5 +270,16 @@ export default {
     opacity: 100%;
   }
   }
+  .form {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+
+    .properties {
+      border-style: solid;
+      border-color: gray;
+    }
+  }
+
 }
 </style>
