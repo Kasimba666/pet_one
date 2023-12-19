@@ -4,23 +4,68 @@
             <div class="animation-control">
                 <div class="control-item">
                     <label for="alpha">Alpha:</label>
-                    <input id="alpha" type="range" :min="minAlpha" :max="maxAlpha" v-model="alpha">
+                    <input id="alpha" type="range" :min="minAlpha" :max="maxAlpha" v-model="cubeRotAxis.alpha">
                     <label for="beta">Beta:</label>
-                    <input id="beta" type="range" :min="minBeta" :max="maxBeta" v-model="beta">
+                    <input id="beta" type="range" :min="minBeta" :max="maxBeta" v-model="cubeRotAxis.beta">
                     <label for="gamma">Gamma:</label>
-                    <input id="gamma" type="range" :min="minGamma" :max="maxGamma" v-model="gamma">
+                    <input id="gamma" type="range" :min="minGamma" :max="maxGamma" v-model="cubeRotAxis.gamma">
                     <button
                             class="btn-primary"
-                            @click="resetAngles()"
+                            @click="resetCubeRotAxis()"
                     > Reset
                     </button>
-                    {{ alpha }} {{ beta }} {{ gamma }} </br>
+                  {{ cubeRotAxis.alpha }} {{ cubeRotAxis.beta }} {{ cubeRotAxis.gamma }} </br>
                     {{ x.toFixed(2) }} {{ y.toFixed(2) }} {{ z.toFixed(2) }}
                 </div>
             </div>
             <div class="animation-view">
                 <div class="scene">
-                    <div class="cube" :style="{transform: rotationCube}">
+                  <div class="plane"></div>
+                    <div class="cube" :style="{transform: rotationAroundAxis}">
+                        <div class="face front">
+                            <div class="face-text">front</div>
+                        </div>
+                        <div class="face back">
+                            <div class="face-text">back</div>
+                        </div>
+                        <div class="face left">
+                            <div class="face-text">left</div>
+                        </div>
+                        <div class="face right">
+                            <div class="face-text">right</div>
+                        </div>
+                        <div class="face top">
+                            <div class="face-text">top</div>
+                        </div>
+                        <div class="face bottom">
+                            <div class="face-text">bottom</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      <div class="animation-item">
+            <div class="animation-control">
+                <div class="control-item">
+                    <label for="alpha">Alpha:</label>
+                    <input id="alpha" type="range" :min="minAlpha" :max="maxAlpha" v-model="cubeEuler.alpha">
+                    <label for="beta">Beta:</label>
+                    <input id="beta" type="range" :min="minBeta" :max="maxBeta" v-model="cubeEuler.beta">
+                    <label for="gamma">Gamma:</label>
+                    <input id="gamma" type="range" :min="minGamma" :max="maxGamma" v-model="cubeEuler.gamma">
+                    <button
+                            class="btn-primary"
+                            @click="resetCubeEuler()"
+                    > Reset
+                    </button>
+                  {{ cubeEuler.alpha }} {{ cubeEuler.beta }} {{ cubeEuler.gamma }}
+                </div>
+            </div>
+            <div class="animation-view">
+                <div class="scene">
+                  <div class="plane"></div>
+                    <div class="cube" :style="{transform: rotationEuler}">
                         <div class="face front">
                             <div class="face-text">front</div>
                         </div>
@@ -63,33 +108,41 @@ export default {
             maxBeta: 180,
             minGamma: -179,
             maxGamma: 180,
-            alpha: 0,
-            beta: 0,
-            gamma: 0,
-            r: 100,
+            cubeRotAxis: {alpha: 0, beta: 0, gamma: 0},
+            cubeEuler: {alpha: 0, beta: 0, gamma: 0},
+            r: 1,
         }
     },
     computed: {
         z() {
-            return this.r * Math.sin(this.beta / 360 * 2 * 3.14);
+            return this.r * Math.sin(this.cubeRotAxis.beta / 360 * 2 * 3.14);
         },
         x() {
-            return this.r * Math.cos(this.beta / 360 * 2 * 3.14) * Math.cos(this.alpha / 360 * 2 * 3.14);
+            return this.r * Math.cos(this.cubeRotAxis.beta / 360 * 2 * 3.14) * Math.cos(this.cubeRotAxis.alpha / 360 * 2 * 3.14);
         },
         y() {
-            return this.r * Math.cos(this.beta / 360 * 2 * 3.14) * Math.sin(this.alpha / 360 * 2 * 3.14);
+            return this.r * Math.cos(this.cubeRotAxis.beta / 360 * 2 * 3.14) * Math.sin(this.cubeRotAxis.alpha / 360 * 2 * 3.14);
         },
-        rotationCube() {
-            return `rotate3d(${this.x}, ${this.y}, ${this.z}, ${this.gamma}deg)`;
-            // return `rotate3d(${this.x}, ${this.y}, ${this.z}, ${this.gamma}deg) translateZ(-100px)`;
+        rotationAroundAxis() {
+            return `rotate3d(${this.x}, ${this.y}, ${this.z}, ${this.cubeRotAxis.gamma}deg)`;
+        },
+
+        rotationEuler() {
+            return `rotateX(${this.cubeEuler.alpha}deg) rotateY(${this.cubeEuler.beta}deg) rotateZ(${this.cubeEuler.gamma}deg)`;
         },
     },
     methods: {
-        resetAngles() {
-            this.alpha = 0;
-            this.beta = 0;
-            this.gamma = 0;
+        resetCubeRotAxis() {
+            this.cubeRotAxis.alpha = 0;
+            this.cubeRotAxis.beta = 0;
+            this.cubeRotAxis.gamma = 0;
         },
+        resetCubeEuler() {
+            this.cubeEuler.alpha = 0;
+            this.cubeEuler.beta = 0;
+            this.cubeEuler.gamma = 0;
+        },
+
     },
     mounted() {
     },
@@ -117,6 +170,7 @@ export default {
     justify-content: flex-start;
     align-items: flex-start;
     gap: 5px;
+    margin-top: 10px;
     //border: 1px solid gray;
     //padding: 5px;
 
@@ -173,7 +227,7 @@ export default {
     position: relative;
     transform-style: preserve-3d;
     transform: translateZ(-100px);
-    transition: transform 1s;
+    transition: transform 0.5s;
 
     .face {
       position: absolute;
@@ -183,7 +237,7 @@ export default {
       font-size: 40px;
       font-weight: bold;
       color: white;
-      background-color: hsla(218, 79%, 77%, 0.75);
+      background-color: hsla(218, 79%, 77%, 0.5);
       display: flex;
       flex-flow: column nowrap;
       justify-content: center;
@@ -193,33 +247,37 @@ export default {
         position: relative;
         font-size: 2rem;
       }
-
       &.front {
-        transform: rotateY(0deg) translateZ(100px);
+        transform: rotateY(0deg) translateZ(75px);
       }
-
       &.back {
-        transform: rotateY(180deg) translateZ(100px);
+        transform: rotateY(180deg) translateZ(75px);
       }
-
       &.right {
-        transform: rotateY(90deg) translateZ(100px);
+        transform: rotateY(90deg) translateZ(75px);
       }
-
       &.left {
-        transform: rotateY(-90deg) translateZ(100px);
+        transform: rotateY(-90deg) translateZ(75px);
       }
-
       &.top {
-        transform: rotateX(90deg) translateZ(100px);
+        transform: rotateX(90deg) translateZ(75px);
       }
-
       &.bottom {
-        transform: rotateX(-90deg) translateZ(100px);
+        transform: rotateX(-90deg) translateZ(75px);
       }
     }
   }
-
+.plane {
+  position: absolute;
+  left: -60px;
+  width: 310px;
+  height: 300px;
+  border: 2px solid black;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  background-color: hsl(0, 61%, 79%, 1);
+}
   input {
     width: 100%;
   }
