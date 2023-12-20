@@ -401,7 +401,7 @@ export default {
   }
   .matrix {
       position: relative;
-      width: 100%;
+      width: 200px;
       height: auto;
       display: flex;
       flex-flow: column nowrap;
