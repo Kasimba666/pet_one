@@ -2,7 +2,6 @@
     <div class="AnimationResearch">
         <div class="animation-item">
             <div class="animation-control">
-                <div class="control-item">
                     <label for="alpha">Around X:</label>
                     <input id="alpha" class="input-angles" type="range" :min="minAlpha" :max="maxAlpha" v-model="cubeEuler.alpha">
                     <label for="beta">Around Y:</label>
@@ -15,7 +14,6 @@
                     > Reset
                     </button>
                     {{ cubeEuler.alpha }} {{ cubeEuler.beta }} {{ cubeEuler.gamma }}
-                </div>
             </div>
             <div class="animation-view">
                 <div class="scene">
@@ -101,58 +99,58 @@
         <div class="matrix">
             <div class="matrix-row">
                 <div class="matrix-cell">
-                    <input type="number" v-model="m.a1">
+                    <input type="number" step="0.1" v-model="m.a1">
                 </div>
                 <div class="matrix-cell">
-                    <input type="number" v-model="m.a2">
+                    <input type="number" step="0.1" v-model="m.a2">
                 </div>
                 <div class="matrix-cell">
-                    <input type="number" v-model="m.a3">
+                    <input type="number" step="0.1" v-model="m.a3">
                 </div>
                 <div class="matrix-cell">
-                    <input type="number" v-model="m.a4">
-                </div>
-            </div>
-            <div class="matrix-row">
-                <div class="matrix-cell">
-                    <input type="number" v-model="m.b1">
-                </div>
-                <div class="matrix-cell">
-                    <input type="number" v-model="m.b2">
-                </div>
-                <div class="matrix-cell">
-                    <input type="number" v-model="m.b3">
-                </div>
-                <div class="matrix-cell">
-                    <input type="number" v-model="m.b4">
+                    <input type="number" step="0.1" v-model="m.a4">
                 </div>
             </div>
             <div class="matrix-row">
                 <div class="matrix-cell">
-                    <input type="number" v-model="m.c1">
+                    <input type="number" step="0.1" v-model="m.b1">
                 </div>
                 <div class="matrix-cell">
-                    <input type="number" v-model="m.c2">
+                    <input type="number" step="0.1" v-model="m.b2">
                 </div>
                 <div class="matrix-cell">
-                    <input type="number" v-model="m.c3">
+                    <input type="number" step="0.1" v-model="m.b3">
                 </div>
                 <div class="matrix-cell">
-                    <input type="number" v-model="m.c4">
+                    <input type="number" step="0.1" v-model="m.b4">
                 </div>
             </div>
             <div class="matrix-row">
                 <div class="matrix-cell">
-                    <input type="number" v-model="m.d1">
+                    <input type="number" step="0.1" v-model="m.c1">
                 </div>
                 <div class="matrix-cell">
-                    <input type="number" v-model="m.d2">
+                    <input type="number" step="0.1" v-model="m.c2">
                 </div>
                 <div class="matrix-cell">
-                    <input type="number" v-model="m.d3">
+                    <input type="number" step="0.1" v-model="m.c3">
                 </div>
                 <div class="matrix-cell">
-                    <input type="number" v-model="m.d4">
+                    <input type="number" step="0.1" v-model="m.c4">
+                </div>
+            </div>
+            <div class="matrix-row">
+                <div class="matrix-cell">
+                    <input type="number" step="0.005" v-model="m.d1">
+                </div>
+                <div class="matrix-cell">
+                    <input type="number" step="0.005" v-model="m.d2">
+                </div>
+                <div class="matrix-cell">
+                    <input type="number" step="0.005" v-model="m.d3">
+                </div>
+                <div class="matrix-cell">
+                    <input type="number" step="0.1" v-model="m.d4">
                 </div>
             </div>
         </div>
@@ -168,6 +166,62 @@
                     <div class="scene-label"></div>
                     <div class="plane"></div>
                     <div class="cube" :style="{transform:  transformM}">
+                        <div class="face front">
+                            <div class="face-text">front</div>
+                        </div>
+                        <div class="face back">
+                            <div class="face-text">back</div>
+                        </div>
+                        <div class="face left">
+                            <div class="face-text">left</div>
+                        </div>
+                        <div class="face right">
+                            <div class="face-text">right</div>
+                        </div>
+                        <div class="face top">
+                            <div class="face-text">top</div>
+                        </div>
+                        <div class="face bottom">
+                            <div class="face-text">bottom</div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="animation-item">
+            <div class="animation-control">
+                <div class="trans-list ">
+                    <template v-if="transList.length>0">
+                        <div class="trans-item" v-for="(item, t) of transList" :key="t">
+                            <div class="trans-title">
+                                {{item.type}}
+                            </div>
+                            <div class="trans-values" v-if="item.type === 'translate'">
+                                <div class="trans-value-label">x: </div>
+                                <div class="trans-value">
+                                    <input class="trans-value-input" type="number" v-model="item.value.x">
+                                </div>
+                            </div>
+                            <div class="trans-matrix">
+                                <div class="trans-matrix-column" v-for="(row, j) of item.m" :key="j">
+                                    <div class="trans-matrix-cell" v-for="(cell, i) of row" :key="i">
+                                        {{ cell }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </template>
+
+                </div>
+            </div>
+            <div class="animation-view">
+                <div class="scene">
+                    <div class="scene-label"></div>
+                    <div class="plane"></div>
+                    <div class="cube" :style="{}">
                         <div class="face front">
                             <div class="face-text">front</div>
                         </div>
@@ -231,24 +285,89 @@ export default {
     methods: {
       init() {
         this.customM = this.getIdentityMatrix(4);
-        this.transList[0] = {type: 'translate', value: {x: 0, y: 0}};
-        this.transList[0]['matrix'] = this.getMatrixTranslate(this.transList[0].value.x, this.transList[0].value.y);
+        this.transList.push({type: 'translate', value: {x: 0, y: 0, z: 0}, m: [],});
+        this.transList.push({type: 'scale', value: {x: 1, y: 2, z: 3}, m: [],});
+        this.transList.push({type: 'skew', value: {ax: 1, ay: 2, az: 3}, m: [],});
+        this.transList.push({type: 'rotateX', value: {a: 45}, m: [],});
+        this.transList.push({type: 'rotateY', value: {a: 45}, m: [],});
+        this.transList.push({type: 'rotateZ', value: {a: 45}, m: [],});
       },
-      getMatrixTranslate(x, y) {
+      getMatrixTranslate(x, y, z) {
         let newM = this.getIdentityMatrix(4);
-        
+        newM[3][0] = x;
+        newM[3][1] = y;
+        newM[3][2] = z;
+        return newM;
       },
-      getMatrixSkew(x, y) {
-
+      getMatrixScale(x, y, z) {
+          let newM = this.getIdentityMatrix(4);
+          newM[0][0] = x;
+          newM[1][1] = y;
+          newM[2][2] = z;
+          return newM;
+      },
+      getMatrixSkew(ax, ay, az) {
+          let newM = this.getIdentityMatrix(4);
+          newM[2][0] = Math.tan(ax * Math.PI / 180).toFixed(2);
+          newM[1][1] = Math.tan(ay * Math.PI / 180).toFixed(2);
+          newM[0][2] = Math.tan(az * Math.PI / 180).toFixed(2);
+          return newM;
       },
       getMatrixRotateX(a) {
-
+          let newM = this.getIdentityMatrix(4);
+          newM[1][1] = Math.cos(a * Math.PI / 180).toFixed(2);
+          newM[1][2] = -Math.sin(a * Math.PI / 180).toFixed(2);
+          newM[2][1] = Math.sin(a * Math.PI / 180).toFixed(2);
+          newM[2][2] = Math.cos(a * Math.PI / 180).toFixed(2);
+          return newM;
       },
       getMatrixRotateY(a) {
+          let newM = this.getIdentityMatrix(4);
+          newM[0][0] = Math.cos(a * Math.PI / 180).toFixed(2);
+          newM[0][2] = Math.sin(a * Math.PI / 180).toFixed(2);
+          newM[2][0] = -Math.sin(a * Math.PI / 180).toFixed(2);
+          newM[2][2] = Math.cos(a * Math.PI / 180).toFixed(2);
+          return newM;
 
       },
       getMatrixRotateZ(a) {
-
+          let newM = this.getIdentityMatrix(4);
+          newM[0][0] = Math.cos(a * Math.PI / 180).toFixed(2);
+          newM[0][1] = Math.sin(a * Math.PI / 180).toFixed(2);
+          newM[1][0] = -Math.sin(a * Math.PI / 180).toFixed(2);
+          newM[1][1] = Math.cos(a * Math.PI / 180).toFixed(2);
+          return newM;
+      },
+      recalcMatricies() {
+          for (let i = 0; i < this.transList.length; i++) {
+              switch (this.transList[i].type) {
+                  case 'translate': {
+                      this.transList[i].m = this.getMatrixTranslate(this.transList[i].value.x, this.transList[i].value.y, this.transList[i].value.z);
+                      break;
+                  };
+                  case 'scale': {
+                      this.transList[i].m = this.getMatrixScale(this.transList[i].value.x, this.transList[i].value.y, this.transList[i].value.z);
+                      break;
+                  };
+                  case 'skew': {
+                      this.transList[i].m = this.getMatrixSkew(this.transList[i].value.ax, this.transList[i].value.ay, this.transList[i].value.az);
+                      break;
+                  };
+                  case 'rotateX': {
+                      this.transList[i].m = this.getMatrixRotateX(this.transList[i].value.a);
+                      break;
+                  };
+                  case 'rotateY': {
+                      this.transList[i].m = this.getMatrixRotateY(this.transList[i].value.a);
+                      break;
+                  };
+                  case 'rotateZ': {
+                      this.transList[i].m = this.getMatrixRotateZ(this.transList[i].value.a);
+                      break;
+                  };
+                  default: {}
+              }
+              }
       },
       getIdentityMatrix(l) {
         let newMatrix = [];
@@ -277,6 +396,7 @@ export default {
     },
     mounted() {
       this.init();
+      this.recalcMatricies();
     },
 }
 </script>
@@ -307,7 +427,7 @@ export default {
     //padding: 5px;
 
     .animation-control {
-      width: 300px;
+      width: auto;
       height: auto;
       display: flex;
       flex-flow: column nowrap;
@@ -434,7 +554,7 @@ export default {
   }
 
   .input-angles {
-    width: 100%;
+    width: auto;
   }
     input {
     width: 100%;
@@ -461,6 +581,84 @@ export default {
           flex: 1 1 auto;
           //width: 60px;
           padding: 5px;
+      }
+  }
+  .trans-list {
+      width: auto;
+      height: auto;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 5px;
+
+      .trans-item {
+          width: 150px;
+          height: auto;
+          display: flex;
+          flex-flow: column nowrap;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 5px;
+          border: 1px solid hsla(0, 0%, 50%, 1);
+
+          .trans-title {
+              width: 100%;
+              height: 30px;
+              display: flex;
+              flex-flow: column nowrap;
+              justify-content: flex-start;
+              align-items: center;
+              gap: 5px;
+          }
+          .trans-values {
+              width: 100%;
+              display: flex;
+              flex-flow: column nowrap;
+              justify-content: flex-start;
+              align-items: center;
+              gap: 5px;
+
+              .trans-value-label {
+
+              }
+              .trans-value {
+                  width: 100%;
+                  height: auto;
+
+                  .trans-value-input {
+                  width: 40px;
+                  }
+              }
+
+          }
+          .trans-matrix {
+              width: 100%;
+              height: auto;
+              display: flex;
+              flex-flow: row nowrap;
+              justify-content: flex-start;
+              align-items: center;
+              gap: 5px;
+
+              .trans-matrix-column {
+                  position: relative;
+                  width: 100%;
+                  height: auto;
+                  display: flex;
+                  flex-flow: column nowrap;
+                  justify-content: flex-start;
+                  align-items: center;
+
+              }
+              .trans-matrix-cell {
+                  //flex: 1 1 auto;
+                  width: 20px;
+                  padding: 5px;
+                  font-size: 0.8rem;
+              }
+
+          }
       }
   }
 }
