@@ -205,9 +205,11 @@ export default {
     props: [],
     data() {
         return {
-            minAlpha: -179, maxAlpha: 180, minBeta: -179, maxBeta: 180, minGamma: -179, maxGamma: 180,
-            cubeEuler: {alpha: 0, beta: 0, gamma: 0},
-            m: {a1: 1, b1: 0, c1: 0, d1: 0, a2: 0, b2: 1, c2: 0, d2: 0, a3: 0, b3: 0, c3: 1, d3: 0, a4: 0, b4: 0, c4: 0, d4: 1},
+          minAlpha: -179, maxAlpha: 180, minBeta: -179, maxBeta: 180, minGamma: -179, maxGamma: 180,
+          cubeEuler: {alpha: 0, beta: 0, gamma: 0},
+          m: {a1: 1, b1: 0, c1: 0, d1: 0, a2: 0, b2: 1, c2: 0, d2: 0, a3: 0, b3: 0, c3: 1, d3: 0, a4: 0, b4: 0, c4: 0, d4: 1},
+          customM: [],
+          transList: [],
         }
     },
     computed: {
@@ -224,8 +226,39 @@ export default {
         transformM() {
             return `matrix3d(${this.m.a1}, ${this.m.b1}, ${this.m.c1}, ${this.m.d1}, ${this.m.a2}, ${this.m.b2}, ${this.m.c2}, ${this.m.d2}, ${this.m.a3}, ${this.m.b3}, ${this.m.c3}, ${this.m.d3}, ${this.m.a4}, ${this.m.b4}, ${this.m.c4}, ${this.m.d4})`;
         }
+
     },
     methods: {
+      init() {
+        this.customM = this.getIdentityMatrix(4);
+        this.transList[0] = {type: 'translate', value: {x: 0, y: 0}};
+        this.transList[0]['matrix'] = this.getMatrixTranslate(this.transList[0].value.x, this.transList[0].value.y);
+      },
+      getMatrixTranslate(x, y) {
+        let newM = this.getIdentityMatrix(4);
+        
+      },
+      getMatrixSkew(x, y) {
+
+      },
+      getMatrixRotateX(a) {
+
+      },
+      getMatrixRotateY(a) {
+
+      },
+      getMatrixRotateZ(a) {
+
+      },
+      getIdentityMatrix(l) {
+        let newMatrix = [];
+        for (let i = 0; i < l; i++) {
+          let newColumn = [];
+          for (let j = 0; j < l; j++)
+            newColumn.push(i === j ? 1 : 0);
+        newMatrix.push(newColumn);}
+        return newMatrix
+      },
         resetCubeEuler() {
             this.cubeEuler.alpha = 0;
             this.cubeEuler.beta = 0;
@@ -234,9 +267,16 @@ export default {
         resetTransformMatrix() {
           this.m = {a1: 1, b1: 0, c1: 0, d1: 0, a2: 0, b2: 1, c2: 0, d2: 0, a3: 0, b3: 0, c3: 1, d3: 0, a4: 0, b4: 0, c4: 0, d4: 1};
         },
-
+        functionTransform(v) {
+          let args = [];
+          for (let i = 0; i < v.length; i++)
+            for (let j = 0; j < v[i].length; j++)
+              args.push(v[i][j]);
+          return 'matrix3d(' + args.join(', ') + ')';
+        }
     },
     mounted() {
+      this.init();
     },
 }
 </script>
