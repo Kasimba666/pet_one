@@ -294,12 +294,24 @@
                     </template>
 
                 </div>
+                <div class="trans-list">
+                    <div class="trans-item">
+                        <div class="trans-matrix">
+                            <div class="trans-matrix-column" v-for="(row, j) of resultTransMatrix" :key="j">
+                                <div class="trans-matrix-cell" v-for="(cell, i) of row" :key="i">
+                                    {{ cell }}
+                                </div>
+                            </div>
+                        </div>
+                        {{ [...resultTransMatrix[0], ...resultTransMatrix[1], ...resultTransMatrix[2], ...resultTransMatrix[3]] }}
+                    </div>
+                </div>
             </div>
             <div class="animation-view">
                 <div class="scene">
                     <div class="scene-label"></div>
                     <div class="plane"></div>
-                    <div class="cube" :style="{}">
+                    <div class="cube" :style="{transform: m3d`}">
                         <div class="face front">
                             <div class="face-text">front</div>
                         </div>
@@ -341,7 +353,7 @@ export default {
           cubeEuler: {alpha: 0, beta: 0, gamma: 0},
           m: {a1: 1, b1: 0, c1: 0, d1: 0, a2: 0, b2: 1, c2: 0, d2: 0, a3: 0, b3: 0, c3: 1, d3: 0, a4: 0, b4: 0, c4: 0, d4: 1},
           transList: [],
-          resultTrans: [],
+
         }
     },
     computed: {
@@ -357,7 +369,21 @@ export default {
         },
         transformM() {
             return `matrix3d(${this.m.a1}, ${this.m.b1}, ${this.m.c1}, ${this.m.d1}, ${this.m.a2}, ${this.m.b2}, ${this.m.c2}, ${this.m.d2}, ${this.m.a3}, ${this.m.b3}, ${this.m.c3}, ${this.m.d3}, ${this.m.a4}, ${this.m.b4}, ${this.m.c4}, ${this.m.d4})`;
+        },
+
+        resultTransMatrix() {
+            if (!this.transList || this.transList.length === 0) return this.getIdentityMatrix(4, 4);
+            if (this.transList.length === 1) return this.transList[0];
+            let newM = this.transList[0].m;
+            for (let i = 1; i < this.transList.length; i++) {
+                newM = this.productTwoMatrices(newM, this.transList[i].m)
+            }
+            return newM;
+        },
+        m3d() {
+            // return `matrix3d(${...this.resultTransMatrix[0], ...this.resultTransMatrix[1], ...this.resultTransMatrix[2], ...this.resultTransMatrix[3]})`
         }
+    }
 
     },
     methods: {
@@ -365,34 +391,34 @@ export default {
         this.transList.push({type: 'translate', value: {x: 0, y: 0, z: 0}, m: [],});
         this.transList.push({type: 'scale', value: {x: 1, y: 1, z: 1}, m: [],});
         this.transList.push({type: 'skew', value: {ax: 0, ay: 0, az: 0}, m: [],});
-        this.transList.push({type: 'rotateX', value: {a: 0}, m: [],});
-        this.transList.push({type: 'rotateY', value: {a: 0}, m: [],});
-        this.transList.push({type: 'rotateZ', value: {a: 0}, m: [],});
-        this.resultTrans = this.getIdentityMatrix(4);
+        this.transList.push({type: 'rotateX', value: {a: 45}, m: [],});
+        this.transList.push({type: 'rotateY', value: {a: 45}, m: [],});
+        this.transList.push({type: 'rotateZ', value: {a: 45}, m: [],});
+        this.resultTrans = this.getIdentityMatrix(4, 4);
       },
       getMatrixTranslate(x, y, z) {
-        let newM = this.getIdentityMatrix(4);
+        let newM = this.getIdentityMatrix(4, 4);
         newM[3][0] = x;
         newM[3][1] = y;
         newM[3][2] = z;
         return newM;
       },
       getMatrixScale(x, y, z) {
-          let newM = this.getIdentityMatrix(4);
+          let newM = this.getIdentityMatrix(4, 4);
           newM[0][0] = x;
           newM[1][1] = y;
           newM[2][2] = z;
           return newM;
       },
       getMatrixSkew(ax, ay, az) {
-          let newM = this.getIdentityMatrix(4);
+          let newM = this.getIdentityMatrix(4, 4);
           newM[2][0] = Math.tan(ax * Math.PI / 180).toFixed(2);
           newM[1][1] = Math.tan(ay * Math.PI / 180).toFixed(2);
           newM[0][2] = Math.tan(az * Math.PI / 180).toFixed(2);
           return newM;
       },
       getMatrixRotateX(a) {
-          let newM = this.getIdentityMatrix(4);
+          let newM = this.getIdentityMatrix(4, 4);
           newM[1][1] = Math.cos(a * Math.PI / 180).toFixed(2);
           newM[1][2] = -Math.sin(a * Math.PI / 180).toFixed(2);
           newM[2][1] = Math.sin(a * Math.PI / 180).toFixed(2);
@@ -400,7 +426,7 @@ export default {
           return newM;
       },
       getMatrixRotateY(a) {
-          let newM = this.getIdentityMatrix(4);
+          let newM = this.getIdentityMatrix(4, 4);
           newM[0][0] = Math.cos(a * Math.PI / 180).toFixed(2);
           newM[0][2] = Math.sin(a * Math.PI / 180).toFixed(2);
           newM[2][0] = -Math.sin(a * Math.PI / 180).toFixed(2);
@@ -409,7 +435,7 @@ export default {
 
       },
       getMatrixRotateZ(a) {
-          let newM = this.getIdentityMatrix(4);
+          let newM = this.getIdentityMatrix(4, 4);
           newM[0][0] = Math.cos(a * Math.PI / 180).toFixed(2);
           newM[0][1] = Math.sin(a * Math.PI / 180).toFixed(2);
           newM[1][0] = -Math.sin(a * Math.PI / 180).toFixed(2);
@@ -447,26 +473,29 @@ export default {
               }
               }
       },
-      calcResultMatrix() {
-        if (!this.transList || this.transList.length === 0) return this.getIdentityMatrix(4);
-        if (this.transList.length === 1) return this.transList[0];
-        let newM = this.transList[0];
-        for (let i = 1; i < this.transList.length; i++) {
-          newM = this.productTwoMatrices(newM, this.transList[i])
+      productTwoMatrices (m1, m2) {
+          if (!m1 || !m2 || m1.length === 0 || m2.length === 0 || m1.length != m2[0].length) return this.getIdentityMatrix(4, 4);
+        let newM = this.getIdentityMatrix(4, 4);
+        let m1Width = m1.length, m1Height = m1[0].length;
+        let m2Width = m2.length, m2Height = m2[0].length;
+        for (let i = 0; i < m2Width; i++) {
+              for (let j = 0; j < m1Height; j++) {
+                  let sum = 0;
+                  for (let k = 0; k < m1Width; k++) {
+                      sum += m1[k][j] * m2[i][k]
+                  }
+                  newM[i][j] = sum.toFixed(2);
+
+              }
         }
         return newM;
       },
-      productTwoMatrices (m1, m2) {
-        // if (!m1 || !m2 || m1.length === 0 || m2.length === 0 || m1.length != m2[0].length) {
-        //   for (let j = 0) {}
-        // }
-      },
 
-      getIdentityMatrix(l) {
+      getIdentityMatrix(col, row) {
         let newMatrix = [];
-        for (let i = 0; i < l; i++) {
+        for (let i = 0; i < col; i++) {
           let newColumn = [];
-          for (let j = 0; j < l; j++)
+          for (let j = 0; j < row; j++)
             newColumn.push(i === j ? 1 : 0);
         newMatrix.push(newColumn);}
         return newMatrix
@@ -486,6 +515,7 @@ export default {
               args.push(v[i][j]);
           return 'matrix3d(' + args.join(', ') + ')';
         }
+
     },
     mounted() {
       this.init();
