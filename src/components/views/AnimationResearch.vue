@@ -495,11 +495,11 @@ export default {
                       break;
                   };
                   case 'shearY': {
-                      this.transList[i].m = this.getMatrixShearX(this.transList[i].value.x, this.transList[i].value.z);
+                      this.transList[i].m = this.getMatrixShearY(this.transList[i].value.x, this.transList[i].value.z);
                       break;
                   };
                   case 'shearZ': {
-                      this.transList[i].m = this.getMatrixShearX(this.transList[i].value.x, this.transList[i].value.y);
+                      this.transList[i].m = this.getMatrixShearZ(this.transList[i].value.x, this.transList[i].value.y);
                       break;
                   };
                   case 'rotateX': {
