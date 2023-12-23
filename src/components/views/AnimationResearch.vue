@@ -203,83 +203,105 @@
                                     <label for="translate-x" class="trans-value-label">x: </label>
                                     <input class="trans-value-input" id="translate-x" type="number" step="5"
                                            v-model="item.value.x"
-                                           @change="recalcMatricies">
+                                           @change="recalcMatrices">
                                 </div>
                                 <div class="trans-value">
                                     <label for="translate-y" class="trans-value-label">y: </label>
                                     <input class="trans-value-input" id="translate-y" type="number"  step="5"
                                            v-model="item.value.y"
-                                           @change="recalcMatricies">
+                                           @change="recalcMatrices">
                                 </div>
                                 <div class="trans-value">
                                     <label for="translate-z" class="trans-value-label">z: </label>
                                     <input class="trans-value-input" id="translate-z" type="number"  step="5"
                                            v-model="item.value.z"
-                                           @change="recalcMatricies">
+                                           @change="recalcMatrices">
                                 </div>
                             </div>
                             <div class="trans-values" v-if="item.type === 'scale'">
                                 <div class="trans-value">
                                     <label for="scale-x" class="trans-value-label">x: </label>
-                                    <input class="trans-value-input" id="scale-x" type="number" step="1"
+                                    <input class="trans-value-input" id="scale-x" type="number" step="0.5"
                                            v-model="item.value.x"
-                                           @change="recalcMatricies">
+                                           @change="recalcMatrices">
                                 </div>
                                 <div class="trans-value">
                                     <label for="scale-y" class="trans-value-label">y: </label>
-                                    <input class="trans-value-input" id="scale-y" type="number"  step="1"
+                                    <input class="trans-value-input" id="scale-y" type="number"  step="0.5"
                                            v-model="item.value.y"
-                                           @change="recalcMatricies">
+                                           @change="recalcMatrices">
                                 </div>
                                 <div class="trans-value">
                                     <label for="scale-z" class="trans-value-label">z: </label>
-                                    <input class="trans-value-input" id="scale-z" type="number"  step="1"
+                                    <input class="trans-value-input" id="scale-z" type="number"  step="0.5"
                                            v-model="item.value.z"
-                                           @change="recalcMatricies">
+                                           @change="recalcMatrices">
                                 </div>
                             </div>
-                            <div class="trans-values" v-if="item.type === 'skew'">
+                            <div class="trans-values" v-if="item.type === 'shearX'">
                                 <div class="trans-value">
-                                    <label for="skew-x" class="trans-value-label">ax: </label>
-                                    <input class="trans-value-input" id="skew-x" type="number" step="1"
-                                           v-model="item.value.ax"
-                                           @change="recalcMatricies">
+                                    <label for="shear-y" class="trans-value-label">y: </label>
+                                    <input class="trans-value-input" id="shear-y" type="number" step="0.2"
+                                           v-model="item.value.y"
+                                           @change="recalcMatrices">
                                 </div>
                                 <div class="trans-value">
-                                    <label for="skew-y" class="trans-value-label">ay: </label>
-                                    <input class="trans-value-input" id="skew-y" type="number"  step="1"
-                                           v-model="item.value.ay"
-                                           @change="recalcMatricies">
+                                    <label for="shear-z" class="trans-value-label">z: </label>
+                                    <input class="trans-value-input" id="shear-z" type="number"  step="0.2"
+                                           v-model="item.value.z"
+                                           @change="recalcMatrices">
+                                </div>
+                            </div>
+                            <div class="trans-values" v-if="item.type === 'shearY'">
+                                <div class="trans-value">
+                                    <label for="shear-x" class="trans-value-label">x: </label>
+                                    <input class="trans-value-input" id="shear-x" type="number" step="0.2"
+                                           v-model="item.value.x"
+                                           @change="recalcMatrices">
                                 </div>
                                 <div class="trans-value">
-                                    <label for="skew-z" class="trans-value-label">az: </label>
-                                    <input class="trans-value-input" id="skew-z" type="number"  step="1"
-                                           v-model="item.value.az"
-                                           @change="recalcMatricies">
+                                    <label for="shear-z" class="trans-value-label">z: </label>
+                                    <input class="trans-value-input" id="shear-z" type="number"  step="0.2"
+                                           v-model="item.value.z"
+                                           @change="recalcMatrices">
+                                </div>
+                            </div>
+                            <div class="trans-values" v-if="item.type === 'shearZ'">
+                                <div class="trans-value">
+                                    <label for="shear-x" class="trans-value-label">x: </label>
+                                    <input class="trans-value-input" id="shear-x" type="number" step="0.2"
+                                           v-model="item.value.x"
+                                           @change="recalcMatrices">
+                                </div>
+                                <div class="trans-value">
+                                    <label for="shear-y" class="trans-value-label">y: </label>
+                                    <input class="trans-value-input" id="shear-y" type="number"  step="0.2"
+                                           v-model="item.value.y"
+                                           @change="recalcMatrices">
                                 </div>
                             </div>
                             <div class="trans-values" v-if="item.type === 'rotateX'">
                                 <div class="trans-value">
                                     <label for="rotate-x" class="trans-value-label">a: </label>
-                                    <input class="trans-value-input" id="rotate-x" type="number" step="1"
+                                    <input class="trans-value-input" id="rotate-x" type="number" step="5"
                                            v-model="item.value.a"
-                                           @change="recalcMatricies">
+                                           @change="recalcMatrices">
                                 </div>
                             </div>
                             <div class="trans-values" v-if="item.type === 'rotateY'">
                                 <div class="trans-value">
                                     <label for="rotate-y" class="trans-value-label">a: </label>
-                                    <input class="trans-value-input" id="rotate-y" type="number" step="1"
+                                    <input class="trans-value-input" id="rotate-y" type="number" step="5"
                                            v-model="item.value.a"
-                                           @change="recalcMatricies">
+                                           @change="recalcMatrices">
                                 </div>
                             </div>
                             <div class="trans-values" v-if="item.type === 'rotateZ'">
                                 <div class="trans-value">
                                     <label for="rotate-z" class="trans-value-label">a: </label>
-                                    <input class="trans-value-input" id="rotate-z" type="number" step="1"
+                                    <input class="trans-value-input" id="rotate-z" type="number" step="5"
                                            v-model="item.value.a"
-                                           @change="recalcMatricies">
+                                           @change="recalcMatrices">
                                 </div>
                             </div>
                             <div class="trans-matrix">
@@ -292,26 +314,23 @@
                         </div>
 
                     </template>
-
-                </div>
-                <div class="trans-list">
-                    <div class="trans-item">
-                        <div class="trans-matrix">
-                            <div class="trans-matrix-column" v-for="(row, j) of resultTransMatrix" :key="j">
-                                <div class="trans-matrix-cell" v-for="(cell, i) of row" :key="i">
-                                    {{ cell }}
-                                </div>
-                            </div>
+                  <div class="trans-item">
+                    <div class="trans-matrix">
+                      <div class="trans-matrix-column" v-for="(row, j) of resultTransMatrix" :key="j">
+                        <div class="trans-matrix-cell" v-for="(cell, i) of row" :key="i">
+                          {{ cell }}
                         </div>
-                        {{ [...resultTransMatrix[0], ...resultTransMatrix[1], ...resultTransMatrix[2], ...resultTransMatrix[3]] }}
+                      </div>
                     </div>
+                  </div>
                 </div>
+
             </div>
             <div class="animation-view">
                 <div class="scene">
                     <div class="scene-label"></div>
                     <div class="plane"></div>
-                    <div class="cube" :style="{transform: m3d`}">
+                    <div class="cube" :style="{transform: m3d}">
                         <div class="face front">
                             <div class="face-text">front</div>
                         </div>
@@ -380,20 +399,26 @@ export default {
             }
             return newM;
         },
-        m3d() {
-            // return `matrix3d(${...this.resultTransMatrix[0], ...this.resultTransMatrix[1], ...this.resultTransMatrix[2], ...this.resultTransMatrix[3]})`
-        }
-    }
+      m3d() {
+        let args = [];
+        for (let i = 0; i < this.resultTransMatrix.length; i++)
+          for (let j = 0; j < this.resultTransMatrix[i].length; j++)
+            args.push(this.resultTransMatrix[i][j]);
+        return `matrix3d(${args})`
+      },
 
     },
     methods: {
+
       init() {
         this.transList.push({type: 'translate', value: {x: 0, y: 0, z: 0}, m: [],});
         this.transList.push({type: 'scale', value: {x: 1, y: 1, z: 1}, m: [],});
-        this.transList.push({type: 'skew', value: {ax: 0, ay: 0, az: 0}, m: [],});
-        this.transList.push({type: 'rotateX', value: {a: 45}, m: [],});
-        this.transList.push({type: 'rotateY', value: {a: 45}, m: [],});
-        this.transList.push({type: 'rotateZ', value: {a: 45}, m: [],});
+        this.transList.push({type: 'shearX', value: {y: 0, z: 0}, m: [],});
+        this.transList.push({type: 'shearY', value: {x: 0, z: 0}, m: [],});
+        this.transList.push({type: 'shearZ', value: {x: 0, y: 0}, m: [],});
+        this.transList.push({type: 'rotateX', value: {a: 0}, m: [],});
+        this.transList.push({type: 'rotateY', value: {a: 0}, m: [],});
+        this.transList.push({type: 'rotateZ', value: {a: 0}, m: [],});
         this.resultTrans = this.getIdentityMatrix(4, 4);
       },
       getMatrixTranslate(x, y, z) {
@@ -410,6 +435,24 @@ export default {
           newM[2][2] = z;
           return newM;
       },
+      getMatrixShearX(y, z) {
+          let newM = this.getIdentityMatrix(4, 4);
+          newM[1][0] = y;
+          newM[2][0] = z;
+          return newM;
+      },
+      getMatrixShearY(x, z) {
+          let newM = this.getIdentityMatrix(4, 4);
+          newM[0][1] = x;
+          newM[2][1] = z;
+          return newM;
+      },
+      getMatrixShearZ(y, z) {
+          let newM = this.getIdentityMatrix(4, 4);
+          newM[0][2] = y;
+          newM[1][2] = z;
+          return newM;
+      },
       getMatrixSkew(ax, ay, az) {
           let newM = this.getIdentityMatrix(4, 4);
           newM[2][0] = Math.tan(ax * Math.PI / 180).toFixed(2);
@@ -417,6 +460,7 @@ export default {
           newM[0][2] = Math.tan(az * Math.PI / 180).toFixed(2);
           return newM;
       },
+
       getMatrixRotateX(a) {
           let newM = this.getIdentityMatrix(4, 4);
           newM[1][1] = Math.cos(a * Math.PI / 180).toFixed(2);
@@ -442,7 +486,7 @@ export default {
           newM[1][1] = Math.cos(a * Math.PI / 180).toFixed(2);
           return newM;
       },
-      recalcMatricies() {
+      recalcMatrices() {
           for (let i = 0; i < this.transList.length; i++) {
               switch (this.transList[i].type) {
                   case 'translate': {
@@ -453,8 +497,16 @@ export default {
                       this.transList[i].m = this.getMatrixScale(this.transList[i].value.x, this.transList[i].value.y, this.transList[i].value.z);
                       break;
                   };
-                  case 'skew': {
-                      this.transList[i].m = this.getMatrixSkew(this.transList[i].value.ax, this.transList[i].value.ay, this.transList[i].value.az);
+                  case 'shearX': {
+                      this.transList[i].m = this.getMatrixShearX(this.transList[i].value.y, this.transList[i].value.z);
+                      break;
+                  };
+                  case 'shearY': {
+                      this.transList[i].m = this.getMatrixShearX(this.transList[i].value.x, this.transList[i].value.z);
+                      break;
+                  };
+                  case 'shearZ': {
+                      this.transList[i].m = this.getMatrixShearX(this.transList[i].value.x, this.transList[i].value.y);
                       break;
                   };
                   case 'rotateX': {
@@ -519,7 +571,7 @@ export default {
     },
     mounted() {
       this.init();
-      this.recalcMatricies();
+      this.recalcMatrices();
     },
 }
 </script>
