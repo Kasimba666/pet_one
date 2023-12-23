@@ -453,13 +453,6 @@ export default {
           newM[1][2] = z;
           return newM;
       },
-      getMatrixSkew(ax, ay, az) {
-          let newM = this.getIdentityMatrix(4, 4);
-          newM[2][0] = Math.tan(ax * Math.PI / 180).toFixed(2);
-          newM[1][1] = Math.tan(ay * Math.PI / 180).toFixed(2);
-          newM[0][2] = Math.tan(az * Math.PI / 180).toFixed(2);
-          return newM;
-      },
 
       getMatrixRotateX(a) {
           let newM = this.getIdentityMatrix(4, 4);
